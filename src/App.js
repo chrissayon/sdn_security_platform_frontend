@@ -1,23 +1,25 @@
 import React from 'react';
 import './App.css';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import Layout from './Containers/Layout'
 
-const useStyles = makeStyles(theme => ({
-  button: {
-    margin: theme.spacing(1),
+import { createMuiTheme } from '@material-ui/core/styles' //Create new muit heme
+import { ThemeProvider } from '@material-ui/styles'; //Changing the themes of the components
+
+const theme = createMuiTheme({
+  props: {
+    // Name of the component ⚛️
+    MuiButtonBase: {
+      // The default props to change
+      disableRipple: true, // No more ripple, on the whole application 💣!
+    },
   },
-  input: {
-    display: 'none',
-  },
-}));
+});
+
 
 function App() {
-  const classes = useStyles();
-
   return (
     <React.Fragment>
-      <Button variant="contained" className={classes.button}>Button</Button>
+      <Layout/>
     </React.Fragment>
   );
 }
