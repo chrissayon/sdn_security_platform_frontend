@@ -13,13 +13,11 @@ const theme = createMuiTheme({
   },
 });
 
-function DefaultProps() {
+const themeEditor = (WrappedComponent) => {
   return (
-    <ThemeProvider theme={theme}>
-      <Button>Change default props</Button>
-    </ThemeProvider>
+    <WrappedComponent />
   );
 }
 
-export default DefaultProps;
+export default themeEditor;
 
