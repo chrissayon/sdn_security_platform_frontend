@@ -16,7 +16,7 @@ class Layout extends Component {
             <React.Fragment>
             
                 <Header>SDN Security Platform</Header> 
-                <Sidebar />
+                {/* <Sidebar /> */}
 
                 <MainBody />
 
