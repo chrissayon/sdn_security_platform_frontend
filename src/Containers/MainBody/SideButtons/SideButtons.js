@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom'
 
-const buttonList = ['SDN Settings', 'View Graph','Settings'];
 
 class SideButtons extends Component {    
     state = {
+        //Button list for buttons
         buttonList: [
             {
                 name: 'SDN Settings',
@@ -37,12 +37,12 @@ class SideButtons extends Component {
 
         return (
             <div>
-                {buttonList.map((element, index) => 
+                {this.state.buttonList.map((element, index) => 
                     <Button 
                         onClick={() => this.handlerLink(index)}
                         variant="contained" 
                         style={{textAlign: "center", width: "100%"}} 
-                        key={index}>{element}</Button>)}
+                        key={index}>{this.state.buttonList[index].name}</Button>)}
             </div>
         )
     }
