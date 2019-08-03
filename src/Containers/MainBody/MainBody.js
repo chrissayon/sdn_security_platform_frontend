@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
+
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import SideButtons from './SideButtons/SideButtons'
+
+import sdnGraph from '../../Components/Graph/Graph';
 
 import { makeStyles } from '@material-ui/core/styles'
 import { withStyles } from '@material-ui/core/styles';
@@ -10,7 +14,6 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
-        paddingLeft: 10,
         
     },
     // grid: {
@@ -30,7 +33,7 @@ class MainBody extends Component {
 
         return (
             <Grid container style={{paddingLeft: 10, paddingRight: 10}} spacing={3}>
-                <Grid item xs={4}>
+                <Grid item xs={2}>
                     {/* <Paper className={classes.paper}>xs=3</Paper> */}
                     <SideButtons />
                 </Grid>
@@ -38,8 +41,12 @@ class MainBody extends Component {
                      <Grid container key={value} item>
                         <Paper className={classes.paper} />
                     </Grid>))} */}
-                <Grid item xs={8}>
-                    <Paper className={classes.paper}>xs=9</Paper>
+                <Grid item xs={10} style={{width: "100%"}}>
+                    {/* <Paper className={classes.paper}>xs=9</Paper> */}
+                <BrowserRouter>
+                    <p>h2</p>
+                    <Route exact path='/' component={sdnGraph}/>
+                </BrowserRouter>
                 </Grid>
             </Grid>
         )

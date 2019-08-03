@@ -15,13 +15,16 @@ const theme = createMuiTheme({
     status: {
       danger: 'orange',
     },
+    MuiAppBar: {
+        paddingDown: '16px'
+    }
   });
 
 
 const header = (props) => {
     return (
         <ThemeProvider theme={theme}>
-            <AppBar position="static">
+            <AppBar style={{marginBottom: 20}} position="static">
                 <Toolbar>
                     <Typography>
                         {props.children}

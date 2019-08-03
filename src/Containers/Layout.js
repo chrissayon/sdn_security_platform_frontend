@@ -1,11 +1,9 @@
 
 import React, { Component } from 'react';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Header from '../Components/UI/Header';
 import Footer from '../Components/UI/Footer';
 import Sidebar from './Sidebar/Sidebar';
 import MainBody from './MainBody/MainBody'
-import sdnGraph from '../Components/Graph/Graph';
 
 
 class Layout extends Component {
@@ -14,17 +12,8 @@ class Layout extends Component {
 
         return (
             <React.Fragment>
-            
-                <Header>SDN Security Platform</Header> 
-                {/* <Sidebar /> */}
-
-                <MainBody />
-
-                {/* <BrowserRouter>
-                    <p>h2</p>
-                    <Route exact path='/' component={sdnGraph}/>
-                </BrowserRouter> */}
-            
+                <Header style={{paddingDown: 10}}>SDN Security Platform</Header> 
+                <MainBody />            
             </React.Fragment>
         )
     }
