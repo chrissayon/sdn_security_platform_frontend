@@ -10,13 +10,13 @@ class renderLineChart extends Component {
     componentDidMount() {
         this.getData(); //Get data first time
         this.interval = setInterval(() => { //wait 5 seconds and rerun it
-           // this.getData();
+            this.getData();
             console.log('Executing every 5 seconds')
         }, 5000);
     }
 
     getData() {
-        axios.get('http://jsonplaceholder.typicode.com/todos')
+        axios.get('http://127.0.0.1:8000/sdn_communication/')
             .then((response) => {
                 console.log(response)
             })
