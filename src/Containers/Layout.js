@@ -1,9 +1,8 @@
-
 import React, { Component } from 'react';
 import Header from '../Components/UI/Header';
 import Footer from '../Components/UI/Footer';
 import Sidebar from './Sidebar/Sidebar';
-import MainBody from './MainBody/MainBody'
+import MainBody from './MainBody/MainBody';
 
 
 class Layout extends Component {

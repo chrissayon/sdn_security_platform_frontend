@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import Settings from './Settings/Settings'
 
 import Grid from '@material-ui/core/Grid';
 import SideButtons from './SideButtons/SideButtons'
 
 import sdnGraph from '../../Components/Graph/Graph';
 import rechartGraph from '../../Components/Graph/rechartGraph';
+
+
 
 import { makeStyles } from '@material-ui/core/styles'
 import { withStyles } from '@material-ui/core/styles';
@@ -40,7 +43,7 @@ class MainBody extends Component {
                     <Grid item xs={10} style={{width: "100%"}}>
                         
                             <Switch>
-                                <Route path={'/sdn-settings'} component={rechartGraph}/>
+                                <Route path={'/sdn-settings'} component={Settings}/>
                                 <Route path={'/graphs'} component={sdnGraph}/>
                                 <Route exact path={'/'} component={null}/>
                             </Switch>

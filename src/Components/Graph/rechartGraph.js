@@ -15,8 +15,12 @@ class renderLineChart extends Component {
         }, 5000);
     }
 
+    componentWillUnmount() {
+        clearInterval(this.interval)
+    }
+
     getData() {
-        axios.get('http://127.0.0.1:8000/sdn_communication/')
+        axios.get('http://127.0.0.1:8000/sdn_communication/desc_stats')
             .then((response) => {
                 console.log(response)
             })
