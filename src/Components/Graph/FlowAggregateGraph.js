@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {
-    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+    LineChart, Line, ResponsiveContainer, Scatter, ScatterChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
   
 const data = [
@@ -28,10 +28,14 @@ const data = [
     },
 ];
 
+
 class FlowAggregateGraph extends Component {
     state = {
         portList : [
-            { x: 0, y: 0 }
+            // // { "date": "2019-08-15T21:24:55.980415+10:00" , "y": 7000 },
+            // // { "date": "2019-08-16T21:24:55.980415+10:00" , "y": 8000 }
+            // { x: 5, y: 9000 },
+            // { x: 10, y: 10000}
         ]
     }
 
@@ -47,31 +51,61 @@ class FlowAggregateGraph extends Component {
         clearInterval(this.interval)
     }
 
+    shouldComponentUpdate(nextProps, nextState){
+        return this.state != nextState
+    }
+
 
     getData() {
         axios.get('http://127.0.0.1:8000/sdn_communication/flow_agg_stats/')
             .then((response) => {
                 let graphData = this.state;
                 console.log(response)
-                console.log(response.data.byte_count)
-                graphData.portList.push({ x: response.data.last_modified, y: response.data.byte_count})
-                console.log(graphData)
+                graphData.portList.push({
+                    time: response.data.last_modified, 
+                    byte_count: response.data.byte_count 
+                })
+                // console.log(graphData)
+                this.setState(
+                    graphData
+                )
             })
     }
     
     
     render () {
+        console.log(this.state)
         return (
-        <LineChart
-            width={500}
-            height={300}
-            data={this.state.portList}
-            margin={{top: 5, right: 30, left: 20, bottom: 5,}}
-        >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis />
-            <YAxis />
-        </LineChart>
+        // <ScatterChart
+        //     width={500}
+        //     height={300}
+        //     data={this.state.portList}
+        //     margin={{top: 5, right: 30, left: 20, bottom: 5,}}
+        // >
+        //     <CartesianGrid strokeDasharray="3 3" />
+        //     <Legend />
+        //     <Scatter
+        //         name="Median"
+        //         data={this.state.portList}
+        //         fill="#8884d8"
+        //         line
+        //         shape="circle"
+        //     />
+            
+        //     <XAxis type="number" dataKey={"x"} />
+        //     <YAxis type="number" dataKey={"y"} />
+        //     <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+        // </ScatterChart>
+        <ResponsiveContainer width="100%" height="100%">
+            <LineChart width={630} height={250} data={this.state.portList}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                <Tooltip />
+                <Line type="monotone" dataKey="byte_count" stroke="#8884d8" />
+                <CartesianGrid stroke="#ccc" />
+                <XAxis dataKey="time" />
+                <YAxis dataKey="byte_count"/>
+            </LineChart>
+        </ResponsiveContainer>
         )
     }
 };
