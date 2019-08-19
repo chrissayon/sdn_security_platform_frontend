@@ -28,6 +28,7 @@ const data = [
     },
 ];
 
+let xValue = 0;
 
 class FlowAggregateGraph extends Component {
     state = {
@@ -60,9 +61,10 @@ class FlowAggregateGraph extends Component {
         axios.get('http://127.0.0.1:8000/sdn_communication/flow_agg_stats/')
             .then((response) => {
                 let graphData = this.state;
-                console.log(response)
+                xValue += 5;
                 graphData.portList.push({
-                    time: response.data.last_modified, 
+                    //time: response.data.last_modified, 
+                    time: xValue, 
                     byte_count: response.data.byte_count 
                 })
                 // console.log(graphData)
@@ -76,27 +78,7 @@ class FlowAggregateGraph extends Component {
     render () {
         console.log(this.state)
         return (
-        // <ScatterChart
-        //     width={500}
-        //     height={300}
-        //     data={this.state.portList}
-        //     margin={{top: 5, right: 30, left: 20, bottom: 5,}}
-        // >
-        //     <CartesianGrid strokeDasharray="3 3" />
-        //     <Legend />
-        //     <Scatter
-        //         name="Median"
-        //         data={this.state.portList}
-        //         fill="#8884d8"
-        //         line
-        //         shape="circle"
-        //     />
-            
-        //     <XAxis type="number" dataKey={"x"} />
-        //     <YAxis type="number" dataKey={"y"} />
-        //     <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-        // </ScatterChart>
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer key={xValue} width="99%" height="99%">
             <LineChart width={630} height={250} data={this.state.portList}
                 margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                 <Tooltip />
