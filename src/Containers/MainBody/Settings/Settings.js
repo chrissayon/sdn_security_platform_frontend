@@ -16,7 +16,7 @@ class Settings extends Component {
         this.getData(); //Get data first time
         this.interval = setInterval(() => { //wait 5 seconds and rerun it
             this.getData();
-        }, 10000);
+        }, 20000);
     }
 
 

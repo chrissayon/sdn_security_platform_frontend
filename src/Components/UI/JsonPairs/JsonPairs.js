@@ -6,9 +6,8 @@ const jsonPairs = (props) => {
 
     return(
         Object.keys(props.jsonList).map((header, index) => (
-            <Box width={2/3} flexWrap="nowrap" display="flex" flexDirection="row" border={1}>
+            <Box  key = { index }  width={ 2/3 } flexWrap="nowrap" display="flex" flexDirection="row" border={1}>
                 <JsonPair
-                    key = { index }
                     header = { header }
                     value = { props.jsonList[header] }
                 >

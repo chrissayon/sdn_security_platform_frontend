@@ -6,7 +6,7 @@ import SideButtons from './SideButtons/SideButtons'
 
 import sdnGraph from '../../Components/Graph/Graph';
 import rechartGraph from '../../Components/Graph/rechartGraph';
-
+import FlowAggregateGraph from '../../Components/Graph/FlowAggregateGraph'
 
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -43,6 +43,7 @@ class MainBody extends Component {
                     <Grid item xs={10} style={{width: "100%"}}>
                         
                             <Switch>
+                                <Route path={'/port-graph'} component={FlowAggregateGraph}/>
                                 <Route path={'/sdn-settings'} component={Settings}/>
                                 <Route path={'/graphs'} component={sdnGraph}/>
                                 <Route exact path={'/'} component={null}/>

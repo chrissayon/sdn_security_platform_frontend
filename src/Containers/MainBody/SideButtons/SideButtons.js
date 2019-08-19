@@ -13,13 +13,28 @@ class SideButtons extends Component {
                 route: '/sdn-settings'
             },
             {
-                name: 'View Graph',
+                name: 'Port Graph',
                 key: 1,
-                route: '/graphs'
+                route: '/port-graph'
+            },
+            {
+                name: 'Port Table',
+                key: 2,
+                route: '/port-table'
+            },
+            {
+                name: 'Flow Aggregate Graph',
+                key: 3,
+                route: '/flow-aggregate-graph'
+            },
+            {
+                name: 'Flow Table',
+                key: 4,
+                route: '/flow-table'
             },
             {
                 name: 'Settings',
-                key: 2,
+                key: 5,
                 route: '/settings'
             }
         ]
