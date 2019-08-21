@@ -10,6 +10,7 @@ import FlowAggregateGraph from '../../Components/Graph/FlowAggregateGraph'
 import PortGraph from '../../Components/Graph/PortGraph'
 import Graph from '../../Components/Graph/Graph'
 
+import Tables from '../../Components/UI/Tables/Tables'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { withStyles } from '@material-ui/core/styles';
@@ -43,9 +44,8 @@ class MainBody extends Component {
                         <SideButtons />
                     </Grid>
                     <Grid item xs={10} style={{width: "100%"}}>
-                        
                             <Switch>                            
-                                <Route path={'/port-table'} component={Graph}/>
+                                <Route path={'/port-table'} component={Tables}/>
                                 <Route path={'/port-graph'} component={PortGraph}/>
                                 <Route path={'/flow-aggregate-graph'} component={FlowAggregateGraph}/>
                                 <Route path={'/sdn-settings'} component={Settings}/>
