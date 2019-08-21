@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Settings from './Settings/Settings'
+import SdnSettings from './SdnSettings/SdnSettings'
 
 import Grid from '@material-ui/core/Grid';
 import SideButtons from './SideButtons/SideButtons'
@@ -48,7 +48,7 @@ class MainBody extends Component {
                                 <Route path={'/port-table'} component={Tables}/>
                                 <Route path={'/port-graph'} component={PortGraph}/>
                                 <Route path={'/flow-aggregate-graph'} component={FlowAggregateGraph}/>
-                                <Route path={'/sdn-settings'} component={Settings}/>
+                                <Route path={'/sdn-settings'} component={SdnSettings}/>
                                 <Route path={'/graphs'} component={sdnGraph}/>
                                 <Route exact path={'/'} component={null}/>
                             </Switch>

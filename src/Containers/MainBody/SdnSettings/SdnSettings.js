@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import JsonPairs from '../../../Components/UI/JsonPairs/JsonPairs'
+import Tables from '../../../Components/UI/Tables/Tables'
 
 class Settings extends Component {
     state = {
@@ -46,7 +47,7 @@ class Settings extends Component {
     render () {
         return (
             <React.Fragment>
-                <JsonPairs jsonList={ this.state } />
+                <Tables headerValue={ this.state } />
             </React.Fragment>
         )
     }
