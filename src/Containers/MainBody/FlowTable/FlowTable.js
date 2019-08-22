@@ -5,7 +5,7 @@ import Tables from '../../../Components/UI/Tables/Tables'
 import { connect } from 'react-redux'
 import { descRequest } from '../../../actions/apiRequests'
 
-class SdnSettings extends Component {
+class Settings extends Component {
     componentDidMount() {
         this.props.descRequest();
     }
@@ -33,6 +33,7 @@ class SdnSettings extends Component {
 
 
     render () {
+        console.log(this.props)
         return (
             <React.Fragment>
                 <Tables headerValue={ this.props.get } />
@@ -47,7 +48,7 @@ class SdnSettings extends Component {
 // }
 
 const mapStateToProps = state => ({
-    get: state.get.descData
+    get: state.get.get
 });
 
-export default connect(mapStateToProps, { descRequest })(SdnSettings);
+export default connect(mapStateToProps, { descRequest })(Settings);

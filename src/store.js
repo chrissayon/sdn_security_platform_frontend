@@ -2,7 +2,17 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers/rootReducer'
 
-const initialState = {};
+const initialState = {
+    post : {
+        flowPost : {},
+    },
+    get : {
+        descData : {},
+        portData : {},
+        flowData : {},
+        flowAggData : {}
+    }
+};
 
 const middleware = [thunk];
 
