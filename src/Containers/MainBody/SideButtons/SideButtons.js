@@ -42,13 +42,13 @@ class SideButtons extends Component {
 
     handlerLink = (index) => {
         const urlLink = this.state.buttonList[index].route;
-        console.log(urlLink);
+        // console.log(urlLink);
         
         this.props.history.push(urlLink);
     }
 
     render () {
-        console.log(this.props)
+        // console.log(this.props)
 
         return (
             <div>

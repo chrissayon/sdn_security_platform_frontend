@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import axios from 'axios';
-import JsonPairs from '../../../Components/UI/JsonPairs/JsonPairs'
 import Tables from '../../../Components/UI/Tables/Tables'
+import { connect } from 'react-redux'
+import { fetchPosts } from '../../../actions/postActions'
 
 class Settings extends Component {
     state = {
@@ -14,10 +16,7 @@ class Settings extends Component {
 
 
     componentDidMount() {
-        this.getData(); //Get data first time
-        this.interval = setInterval(() => { //wait 5 seconds and rerun it
-            this.getData();
-        }, 20000);
+        this.props.fetchPosts();
     }
 
 
@@ -47,10 +46,19 @@ class Settings extends Component {
     render () {
         return (
             <React.Fragment>
-                <Tables headerValue={ this.state } />
+                <Tables headerValue={ this.props.posts } />
             </React.Fragment>
         )
     }
 }
 
-export default Settings;
+// Posts.propTypes = {
+//     fetchPosts: PropTypes.funcisRequired,
+//     posts: PropTypes.array.isRequired
+// }
+
+const mapStateToProps = state => ({
+    posts: state.posts.items
+});
+
+export default connect(mapStateToProps, { fetchPosts })(Settings);
