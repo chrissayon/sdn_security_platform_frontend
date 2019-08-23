@@ -19,8 +19,8 @@ class SdnSettings extends Component {
     getData() {
         axios.get('http://127.0.0.1:8000/sdn_communication/desc_stats/')
             .then((response) => {
-                console.log(response)
-                console.log(response.data)
+                //console.log(response)
+                //console.log(response.data)
                 let hardwareDesc = {
                     "Datapath ID"              : response.data.id,
                     "Manufacturer Description" : response.data.mfr_desc,

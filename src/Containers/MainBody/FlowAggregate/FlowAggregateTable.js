@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import axios from 'axios';
 import Tables from '../../../Components/UI/Tables/Tables'
 import { connect } from 'react-redux'
-import { descRequest } from '../../../actions/apiRequests'
+import { flowAggStatsRequest } from '../../../actions/apiRequests'
 
-class Settings extends Component {
+class FlowAggTable extends Component {
     componentDidMount() {
-        this.props.descRequest();
+        this.props.flowAggStatsRequest();
     }
 
 
@@ -19,8 +19,8 @@ class Settings extends Component {
     getData() {
         axios.get('http://127.0.0.1:8000/sdn_communication/desc_stats/')
             .then((response) => {
-                console.log(response)
-                console.log(response.data)
+                //console.log(response)
+                //console.log(response.data)
                 let hardwareDesc = {
                     "Datapath ID"              : response.data.id,
                     "Manufacturer Description" : response.data.mfr_desc,
@@ -33,7 +33,6 @@ class Settings extends Component {
 
 
     render () {
-        console.log(this.props)
         return (
             <React.Fragment>
                 <Tables headerValue={ this.props.get } />
@@ -48,7 +47,7 @@ class Settings extends Component {
 // }
 
 const mapStateToProps = state => ({
-    get: state.get.get
+    get: state.get.descData
 });
 
-export default connect(mapStateToProps, { descRequest })(Settings);
+export default connect(mapStateToProps, { descRequest })(SdnSettings);

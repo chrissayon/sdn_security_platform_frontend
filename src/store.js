@@ -8,8 +8,8 @@ const initialState = {
     },
     get : {
         descData : {},
-        portData : {},
-        flowData : {},
+        portData : [{}],
+        flowData : [{}],
         flowAggData : {}
     }
 };

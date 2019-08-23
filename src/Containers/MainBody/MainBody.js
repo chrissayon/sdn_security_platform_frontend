@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import SdnSettings from './SdnSettings/SdnSettings'
+import FlowTable from './Flow/FlowTable'
+import PortTable from './Port/PortTable'
 
 import Grid from '@material-ui/core/Grid';
 import SideButtons from './SideButtons/SideButtons'
 
 import sdnGraph from '../../Components/Graph/Graph';
 import rechartGraph from '../../Components/Graph/rechartGraph';
-import FlowAggregateGraph from '../../Components/Graph/FlowAggregateGraph'
-import PortGraph from '../../Components/Graph/PortGraph'
+import FlowAggregateGraph from './FlowAggregate/FlowAggregateGraph'
+import PortGraph from './Port/PortGraph'
 import Graph from '../../Components/Graph/Graph'
 
-import Tables from '../../Components/UI/Tables/Tables'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { withStyles } from '@material-ui/core/styles';
@@ -45,8 +46,8 @@ class MainBody extends Component {
                     </Grid>
                     <Grid item xs={10} style={{width: "100%"}}>
                             <Switch>                            
-                                <Route path={'/port-table'} component={Tables}/>
-                                <Route path={'/port-graph'} component={PortGraph}/>
+                                <Route path={'/flow-table'} component={FlowTable}/>
+                                <Route path={'/port-table'} component={PortTable}/>
                                 <Route path={'/flow-aggregate-graph'} component={FlowAggregateGraph}/>
                                 <Route path={'/sdn-settings'} component={SdnSettings}/>
                                 <Route path={'/graphs'} component={sdnGraph}/>

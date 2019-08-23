@@ -14,13 +14,13 @@ const useStyles = makeStyles(theme => ({
     overflowX: 'auto',
   },
   table: {
-    minWidth: 650,
+    minWidth: 300,
   },
 }));
 
 function HeaderValueTable(props) {
   const classes = useStyles();
-  console.log(props);
+  // console.log(props);
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
@@ -28,11 +28,11 @@ function HeaderValueTable(props) {
           <TableRow>
             <TableCell>Field</TableCell>
             <TableCell>Description</TableCell>
-            </TableRow>
+          </TableRow>
         </TableHead>
         <TableBody>
-            {Object.keys(props.headerValue).map(header => (
-              <TableRow>
+            {Object.keys(props.headerValue).map((header, index) => (
+              <TableRow key={index}>
                   <TableCell align="right">{header}</TableCell>
                   <TableCell align="right">{props.headerValue[header]}</TableCell>
               </TableRow>
