@@ -4,8 +4,9 @@ import Tables from '../../../Components/UI/Tables/Tables'
 import { connect } from 'react-redux'
 import { portStatsRequest } from '../../../actions/apiRequests'
 
-class FlowTable extends Component {
+class PortTable extends Component {
     componentDidMount() {
+        // Port stats API request
         this.props.portStatsRequest();
     }
 
@@ -15,14 +16,13 @@ class FlowTable extends Component {
     }
 
     render () {
-        console.log(this.props.get)
         return (
             <React.Fragment>
-                {this.props.get.map((data) => {
+                {this.props.get.map((data, index) => {
                     return (
-                        <React.Fragment>
+                        <React.Fragment key={index}>
                             <h1>Port Table {data.id}</h1>
-                            <Tables headerValue={data} />
+                            <Tables key={index} headerValue={data} />
                         </React.Fragment>
                     )
                 })}
@@ -40,4 +40,4 @@ const mapStateToProps = state => ({
     get: state.get.portData
 });
 
-export default connect(mapStateToProps, { portStatsRequest })(FlowTable);
+export default connect(mapStateToProps, { portStatsRequest })(PortTable);

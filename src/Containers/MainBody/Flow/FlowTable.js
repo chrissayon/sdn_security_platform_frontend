@@ -14,14 +14,14 @@ class FlowTable extends Component {
         clearInterval(this.interval)
     }
 
+
     render () {
-        console.log(this.props.get)
         return (
                 this.props.get.map((data, header) => {
                     return (
                         <React.Fragment key={header}>
                             <h1>Flow Table {data.id}</h1>
-                            <Tables headerValue={data} />
+                            <Tables key={header} headerValue={data} />
                         </React.Fragment>
                     )
                 })

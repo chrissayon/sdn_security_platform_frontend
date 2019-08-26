@@ -3,14 +3,15 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers/rootReducer'
 
 const initialState = {
-    post : {
-        flowPost : {},
-    },
     get : {
         descData : {},
         portData : [{}],
         flowData : [{}],
         flowAggData : {}
+    },
+    graphData : {
+        flowAggGraphData : [{}],
+        portGraphData : [{}],
     }
 };
 
