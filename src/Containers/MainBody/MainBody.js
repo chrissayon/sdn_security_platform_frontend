@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 
 // Route Related
@@ -6,7 +6,7 @@ import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import { withRouter } from 'react-router-dom'
 
 // CSS Related
-import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -33,7 +33,7 @@ import sdnGraph from '../../Components/Graph/Graph';
 
 const drawerWidth = 240;
 
-const styles = makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
@@ -98,137 +98,135 @@ const styles = makeStyles(theme => ({
 
 
 
-class MainBody extends Component {
-  state = {
-    open: false,
-    setOpen: false,
-    buttonList: [
-      {
-          name: 'SDN Settings',
-          key: 0,
-          route: '/sdn-settings'
-      },
-      {
-          name: 'Port Graph',
-          key: 1,
-          route: '/port-graph'
-      },
-      {
-          name: 'Port Table',
-          key: 2,
-          route: '/port-table'
-      },
-      {
-          name: 'Flow Aggregate Graph',
-          key: 3,
-          route: '/flow-aggregate-graph'
-      },
-      {
-          name: 'Flow Table',
-          key: 4,
-          route: '/flow-table'
-      },
-      {
-          name: 'Settings',
-          key: 5,
-          route: '/settings'
-      }
-  ]}
+const MainBody = (props) => {
+  const classes = useStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+  const [buttonIcon] = React.useState("SDN");
+  //const [buttonList] = React.useState(["SDN Settings", "Apple"]);
+  const [buttonList] = React.useState([
+        {
+            name: 'SDN Settings',
+            key: 0,
+            route: '/sdn-settings'
+        },
+        {
+            name: 'Port Graph',
+            key: 1,
+            route: '/port-graph'
+        },
+        {
+            name: 'Port Table',
+            key: 2,
+            route: '/port-table'
+        },
+        {
+            name: 'Flow Aggregate Graph',
+            key: 3,
+            route: '/flow-aggregate-graph'
+        },
+        {
+            name: 'Flow Table',
+            key: 4,
+            route: '/flow-table'
+        },
+        {
+            name: 'Settings',
+            key: 5,
+            route: '/settings'
+        }
+    ]);
 
 
 
-  handlerLink = (index) => {
-    const urlLink = this.state.buttonList[index].route;
+  const handlerLink = (index) => {
+    const urlLink = buttonList[index].route;
     // console.log(urlLink);
-    console.log(this.props)
+    console.log(props)
+    props.history.push(urlLink);
   }
 
-  handleDrawerOpen() {
-    this.setState({setOpen: true})
+  function handleDrawerOpen() {
+    setOpen(true);
   }
 
-  handleDrawerClose() {
-    this.setState({setOpen: false})
+  function handleDrawerClose() {
+    setOpen(false);
   }
 
 
-  render () {
-    // const theme = useTheme();
 
-    return (
-      <div className={root}>
-        <CssBaseline />
-        <AppBar
-          position="fixed"
-          className={clsx(appBar, {
-              [appBarShift]: this.state.open,
-            })}
-        >
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={this.handleDrawerOpen}
-              edge="start"
-              className={clsx(menuButton, {
-                [hide]: this.state.open,
-              })}
-            >
-              <MenuIcon />
-            </IconButton>
-            
-            <Typography variant="h6" noWrap>
-              SDN Security Platform
-            </Typography>
-          </Toolbar>
-        </AppBar>
-
-        <Drawer
-          variant="permanent"
-          className={clsx(drawer, {
-            [drawerOpen]: this.state.open,
-            [drawerClose]: !this.state.open,
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
           })}
-          classes={{
-            paper: clsx({
-              [drawerOpen]: this.state.open,
-              [drawerClose]: !this.state.open,
-            }),
-          }}
-          open={this.state.open}
-        >
-          <div className={toolbar}>
-              <IconButton onClick={this.handleDrawerClose}>
-                {/* {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />} */}
-                <ChevronLeftIcon />
-              </IconButton>
-          </div>
-          <Divider />
-          <List>
-              {this.state.buttonList.map((text, index) => (
-                  <ListItem button onClick={() => this.handlerLink(index)} key={index}>
-                  <ListItemText primary={this.state.buttonList[index].name} />
-                  </ListItem>
-              ))}
-          </List>
-        </Drawer>
-        <main className={content}>
-          <div className={toolbar} />
-          <BrowserRouter>
-            <Switch>                            
-                <Route path={'/flow-table'} component={FlowTable}/>
-                <Route path={'/port-table'} component={PortTable}/>
-                <Route path={'/flow-aggregate-graph'} component={FlowAggregateGraph}/>
-                <Route path={'/sdn-settings'} component={SdnSettings}/>
-                <Route path={'/graphs'} component={sdnGraph}/>
-                <Route exact path={'/'} component={null}/>
-            </Switch>
-          </BrowserRouter>
-        </main>
-      </div>
-    )
-  };
+      >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            className={clsx(classes.menuButton, {
+              [classes.hide]: open,
+            })}
+          >
+            <MenuIcon />
+          </IconButton>
+          
+          <Typography variant="h6" noWrap>
+            SDN Security Platform
+          </Typography>
+        </Toolbar>
+      </AppBar>
+
+      <Drawer
+        variant="permanent"
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open,
+        })}
+        classes={{
+          paper: clsx({
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open,
+          }),
+        }}
+        open={open}
+      >
+        <div className={classes.toolbar}>
+            <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            </IconButton>
+        </div>
+        <Divider />
+        <List>
+            {buttonList.map((text, index) => (
+                <ListItem button onClick={() => handlerLink(index)} key={index}>
+                <ListItemText primary={buttonList[index].name} />
+                </ListItem>
+            ))}
+        </List>
+      </Drawer>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        
+          <Switch>                            
+              <Route path={'/flow-table'} component={FlowTable}/>
+              <Route path={'/port-table'} component={PortTable}/>
+              <Route path={'/flow-aggregate-graph'} component={FlowAggregateGraph}/>
+              <Route path={'/sdn-settings'} component={SdnSettings}/>
+              <Route path={'/graphs'} component={sdnGraph}/>
+              <Route exact path={'/'} component={null}/>
+          </Switch>
+        
+      </main>
+    </div>
+  );
 }
 
-
-export default withStyles(styles)(MainBody);
+export default withRouter(MainBody);
