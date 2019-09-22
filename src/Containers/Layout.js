@@ -7,12 +7,9 @@ import store from '../store'
 class Layout extends Component {
     render () {
         //const classes = useStyles();
-
         return (
             <Provider store = {store}>
-                <React.Fragment>
-                    <MainBody />      
-                </React.Fragment>
+                <MainBody />      
             </Provider>
         )
     }
