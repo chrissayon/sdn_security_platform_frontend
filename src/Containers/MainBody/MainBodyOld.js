@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import SdnSettings from './SdnSettings/SdnSettings'
 import FlowTable from './Flow/FlowTable'
 import PortTable from './Port/PortTable'
-
 import Grid from '@material-ui/core/Grid';
 import SideButtons from './SideButtons/SideButtons'
 
