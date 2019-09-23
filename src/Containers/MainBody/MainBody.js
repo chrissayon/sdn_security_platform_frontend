@@ -15,6 +15,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+
+// Icon Realted
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -23,6 +25,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications'
+import BuildIcon from '@material-ui/icons/Build'
+import EventNoteIcon from '@material-ui/icons/EventNote'
+import ListAllIcon from '@material-ui/icons/ListAlt'
+import ComputerIcon from '@material-ui/icons/Computer'
 
 // Notification Popup
 import NotificationPopover from './NotificationPopUp/NotificationPopover'
@@ -113,47 +120,58 @@ const MainBody = (props) => {
   const [buttonList] = React.useState([
         {
             name: 'SDN Settings',
-            route: '/sdn-settings'
+            route: '/sdn-settings',
+            icon: <SettingsApplicationsIcon />
         },
         {
             name: 'Port Graph',
-            route: '/port-graph'
+            route: '/port-graph',
+            icon: <ComputerIcon />
         },
         {
             name: 'Port Table',
-            route: '/port-table'
+            route: '/port-table',
+            icon: <ComputerIcon />
         },
         {
             name: 'Flow Aggregate Graph',
-            route: '/flow-aggregate-graph'
+            route: '/flow-aggregate-graph',
+            icon: <ComputerIcon />
         },
         {
             name: 'Flow Table',
-            route: '/flow-table'
+            route: '/flow-table',
+            icon: <ComputerIcon />
         },
         {
             name: 'Settings',
-            route: '/settings'
+            route: '/settings',
+            icon: <SettingsApplicationsIcon />
         },
         {
             name: 'SDN Configuration',
-            route: '/sdn-configuration'
+            route: '/sdn-configuration',
+            icon: <SettingsApplicationsIcon />
         },
         {
           name: 'ML Configuration',
-          route: '/ml-configuration'
+          route: '/ml-configuration',
+          icon: <BuildIcon />
         },
         {
           name: 'Notification Settings',
-          route: '/notification-settings'
+          route: '/notification-settings',
+          icon: <EventNoteIcon />
         },
         {
           name: 'Live Monitoring',
-          route: '/live-monitoring'
+          route: '/live-monitoring',
+          icon: <ComputerIcon />
         },
         {
           name: 'View Logs',
-          route: '/view-logs'
+          route: '/view-logs',
+          icon: <ListAllIcon />
         },
     ]);
 
@@ -228,7 +246,10 @@ const MainBody = (props) => {
         <List>
             {buttonList.map((text, index) => (
                 <ListItem button onClick={() => handlerLink(index)} key={index}>
-                <ListItemText primary={buttonList[index].name} />
+                  <ListItemIcon>{ buttonList[index].icon } </ListItemIcon>
+                   {/* { console.log(buttonList[index].icon) } */}
+                 
+                  <ListItemText primary={buttonList[index].name} />
                 </ListItem>
             ))}
         </List>
