@@ -12,6 +12,9 @@ const initialState = {
     graphData : {
         flowAggGraphData : [{}],
         portGraphData : [{}],
+    },
+    notificationData : {
+
     }
 };
 

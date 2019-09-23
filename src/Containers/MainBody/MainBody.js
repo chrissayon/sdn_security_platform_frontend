@@ -24,6 +24,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
+// Notification Popup
+import NotificationPopover from './NotificationPopUp/NotificationPopover'
+
 //Body Related
 import FlowTable from './Flow/FlowTable'
 import PortTable from './Port/PortTable'
@@ -93,6 +96,9 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  title : {
+    flexGrow: 1
+  }
 }));
 
 
@@ -102,39 +108,53 @@ const MainBody = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [buttonIcon] = React.useState("SDN");
-  //const [buttonList] = React.useState(["SDN Settings", "Apple"]);
+  const [notificationWindowOpen, setNotificationWindowOpen] = React.useState(false);
+  
   const [buttonList] = React.useState([
         {
             name: 'SDN Settings',
-            key: 0,
             route: '/sdn-settings'
         },
         {
             name: 'Port Graph',
-            key: 1,
             route: '/port-graph'
         },
         {
             name: 'Port Table',
-            key: 2,
             route: '/port-table'
         },
         {
             name: 'Flow Aggregate Graph',
-            key: 3,
             route: '/flow-aggregate-graph'
         },
         {
             name: 'Flow Table',
-            key: 4,
             route: '/flow-table'
         },
         {
             name: 'Settings',
-            key: 5,
             route: '/settings'
-        }
+        },
+        {
+            name: 'SDN Configuration',
+            route: '/sdn-configuration'
+        },
+        {
+          name: 'ML Configuration',
+          route: '/ml-configuration'
+        },
+        {
+          name: 'Notification Settings',
+          route: '/notification-settings'
+        },
+        {
+          name: 'Live Monitoring',
+          route: '/live-monitoring'
+        },
+        {
+          name: 'View Logs',
+          route: '/view-logs'
+        },
     ]);
 
 
@@ -153,8 +173,6 @@ const MainBody = (props) => {
   function handleDrawerClose() {
     setOpen(false);
   }
-
-
 
   return (
     <div className={classes.root}>
@@ -178,9 +196,12 @@ const MainBody = (props) => {
             <MenuIcon />
           </IconButton>
           
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" className={classes.title}>
             SDN Security Platform
           </Typography>
+          
+          <NotificationPopover />
+       
         </Toolbar>
       </AppBar>
 

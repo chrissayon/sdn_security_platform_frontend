@@ -1,4 +1,4 @@
-import {  } from '../actions/types';
+import { NOTIFICATION_ALERT } from '../actions/types';
 
 const initialState = {
     
