@@ -23,8 +23,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications'
 import BuildIcon from '@material-ui/icons/Build'
 import EventNoteIcon from '@material-ui/icons/EventNote'
@@ -40,6 +38,9 @@ import PortTable from './Port/PortTable'
 import SdnSettings from './SdnSettings/SdnSettings'
 import FlowAggregateGraph from './FlowAggregate/FlowAggregateGraph'
 import sdnGraph from '../../Components/Graph/Graph';
+
+import MLConfiguration from '../MainBody/MLConfiguration/MLConfiguration'
+import NotificationSetting from '../MainBody/NotificationSettings/NotificationSettings'
 
 const drawerWidth = 240;
 
@@ -115,7 +116,6 @@ const MainBody = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [notificationWindowOpen, setNotificationWindowOpen] = React.useState(false);
   
   const [buttonList] = React.useState([
         {
@@ -223,6 +223,10 @@ const MainBody = (props) => {
         </Toolbar>
       </AppBar>
 
+
+
+
+
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -263,6 +267,8 @@ const MainBody = (props) => {
               <Route path={'/flow-aggregate-graph'} component={FlowAggregateGraph}/>
               <Route path={'/sdn-settings'} component={SdnSettings}/>
               <Route path={'/graphs'} component={sdnGraph}/>
+              <Route path={'/ml-configuration'} component={MLConfiguration} />
+              <Route path={'/notification-settings'} component={NotificationSetting} />
               <Route exact path={'/'} component={null}/>
           </Switch>
         
