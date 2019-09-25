@@ -41,6 +41,7 @@ import sdnGraph from '../../Components/Graph/Graph';
 
 import MLConfiguration from '../MainBody/MLConfiguration/MLConfiguration'
 import NotificationSetting from '../MainBody/NotificationSettings/NotificationSettings'
+import ViewLogs from '../MainBody/ViewLogs/ViewLogs'
 
 const drawerWidth = 240;
 
@@ -121,57 +122,57 @@ const MainBody = (props) => {
         {
             name: 'SDN Settings',
             route: '/sdn-settings',
-            icon: <SettingsApplicationsIcon />
+            icon: <ListItemIcon><SettingsApplicationsIcon /></ListItemIcon>
         },
         {
             name: 'Port Graph',
             route: '/port-graph',
-            icon: <ComputerIcon />
+            icon: <ListItemIcon><ComputerIcon /></ListItemIcon>
         },
         {
             name: 'Port Table',
             route: '/port-table',
-            icon: <ComputerIcon />
+            icon: <ListItemIcon><ComputerIcon /></ListItemIcon>
         },
         {
             name: 'Flow Aggregate Graph',
             route: '/flow-aggregate-graph',
-            icon: <ComputerIcon />
+            icon: <ListItemIcon><ComputerIcon /></ListItemIcon>
         },
         {
             name: 'Flow Table',
             route: '/flow-table',
-            icon: <ComputerIcon />
+            icon: <ListItemIcon><ComputerIcon /></ListItemIcon>
         },
         {
             name: 'Settings',
             route: '/settings',
-            icon: <SettingsApplicationsIcon />
+            icon: <ListItemIcon><SettingsApplicationsIcon /></ListItemIcon>
         },
         {
             name: 'SDN Configuration',
             route: '/sdn-configuration',
-            icon: <SettingsApplicationsIcon />
+            icon: <ListItemIcon><SettingsApplicationsIcon /></ListItemIcon>
         },
         {
           name: 'ML Configuration',
           route: '/ml-configuration',
-          icon: <BuildIcon />
+          icon: <ListItemIcon><BuildIcon /></ListItemIcon>
         },
         {
           name: 'Notification Settings',
           route: '/notification-settings',
-          icon: <EventNoteIcon />
+          icon: <ListItemIcon><EventNoteIcon /></ListItemIcon>
         },
         {
           name: 'Live Monitoring',
           route: '/live-monitoring',
-          icon: <ComputerIcon />
+          icon: <ListItemIcon><ComputerIcon /></ListItemIcon>
         },
         {
           name: 'View Logs',
           route: '/view-logs',
-          icon: <ListAllIcon />
+          icon: <ListItemIcon><ListAllIcon /></ListItemIcon>
         },
     ]);
 
@@ -250,7 +251,7 @@ const MainBody = (props) => {
         <List>
             {buttonList.map((text, index) => (
                 <ListItem button onClick={() => handlerLink(index)} key={index}>
-                  <ListItemIcon>{ buttonList[index].icon } </ListItemIcon>
+                  { buttonList[index].icon } 
                    {/* { console.log(buttonList[index].icon) } */}
                  
                   <ListItemText primary={buttonList[index].name} />
@@ -269,6 +270,7 @@ const MainBody = (props) => {
               <Route path={'/graphs'} component={sdnGraph}/>
               <Route path={'/ml-configuration'} component={MLConfiguration} />
               <Route path={'/notification-settings'} component={NotificationSetting} />
+              <Route path={'/view-logs'} component={ViewLogs} />
               <Route exact path={'/'} component={null}/>
           </Switch>
         
