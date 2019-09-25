@@ -52,7 +52,7 @@ export default function SimpleSelect() {
   };
 
   const handleRecordChange = event => {
-      setMaxRecords(event.target.value)
+      setMaxRecords(parseInt(event.target.value))
   }
  
 
@@ -63,20 +63,37 @@ export default function SimpleSelect() {
     }));
   };
 
+  const formatDate = (date) => {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
   const logClicked = () => {
-      console.log(values)
-      console.log(endDate)
-      console.log(startDate)
-      console.log(maxRecords)
-    // axios.post('http://127.0.0.1:8000/sdn_communication/update_ml_threshold/',{
-    //     data: { ml_threshold : values },
-    // })
-    // .then((response) => {
-    //     console.log(response)
-    // })
+    console.log(values)
+    console.log(formatDate(startDate))
+    console.log(formatDate(endDate))
+    console.log(maxRecords)
+
     if(values.statType === 'flow_aggregate'){
         axios.post('http://127.0.0.1:8000/sdn_communication/flow_agg_stats/',{
-            data: { ml_threshold : values },
+            data: { 
+                'maxRecords' : maxRecords,
+                'startDateYear' : startDate.getFullYear(),
+                'startDateMonth' : startDate.getMonth() + 1,
+                'startDateDay' : startDate.getDate(),
+                'endDateYear' : endDate.getFullYear(),
+                'endDateMonth' : endDate.getMonth() + 1,
+                'endDateDay' : endDate.getDate(),
+            },
         })
         .then((response) => {
             console.log(response)
@@ -151,10 +168,11 @@ export default function SimpleSelect() {
         </Grid>
         <Grid item xs={12}>
             <TextField
-                id="standard-helperText"
+                id="standard-number"
                 label="Max Records"
                 helperText="Please input an integer"
                 margin="normal"
+                type="number"
                 onChange={handleRecordChange}
             />
         </Grid>
