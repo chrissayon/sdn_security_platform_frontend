@@ -304,12 +304,8 @@ export default function SimpleSelect() {
     }
 
     const logClicked = () => {
-        // console.log(values)
-        // console.log(formatDate(startDate))
-        // console.log(formatDate(endDate))
-        // console.log(maxRecords)
+
         setViewLogs(true)
-        console.log(values.statType)
         if(values.statType === 'flow_aggregate') {
             flowAggPost()
         } else if (values.statType === 'flow_aggregate_diff') {
@@ -410,32 +406,35 @@ export default function SimpleSelect() {
                 >
                     View Logs
                 </Button>
-               
-                <FormControl >
-                    <InputLabel shrink>
-                        Statistic Type
-                    </InputLabel>
-                    <Select
-                        value={portValue.portValue}
-                        onChange={handlePortValue}
-                        inputProps={{
-                            name: 'portValue',
-                            id: 'portValueID',
-                        }}
-                        displayEmpty
-                        name=""
-                        // className={classes.selectEmpty}
-                    >
-                        <MenuItem value="All">
-                            <em>All</em>
-                        </MenuItem>
-                        <MenuItem value={"1"}>Port 1</MenuItem>
-                        <MenuItem value={"2"}>Port 2</MenuItem>
-                        <MenuItem value={"3"}>Port 3</MenuItem>
-                        <MenuItem value={"LOCAL"}>Port LOCAL</MenuItem>
-                      </Select>
-                    <FormHelperText>Select desired data</FormHelperText>
-                </FormControl>
+               {
+                   ((values.statType === 'port_stats') | (values.statType === 'port_diff')) ? (
+                        <FormControl >
+                            <InputLabel shrink>
+                                Statistic Type
+                            </InputLabel>
+                            <Select
+                                value={portValue.portValue}
+                                onChange={handlePortValue}
+                                inputProps={{
+                                    name: 'portValue',
+                                    id: 'portValueID',
+                                }}
+                                displayEmpty
+                                name=""
+                                // className={classes.selectEmpty}
+                            >
+                                <MenuItem value="All">
+                                    <em>All</em>
+                                </MenuItem>
+                                <MenuItem value={"1"}>Port 1</MenuItem>
+                                <MenuItem value={"2"}>Port 2</MenuItem>
+                                <MenuItem value={"3"}>Port 3</MenuItem>
+                                <MenuItem value={"LOCAL"}>Port LOCAL</MenuItem>
+                            </Select>
+                            <FormHelperText>Select desired data</FormHelperText>
+                        </FormControl>
+                    ) : null
+               }
             </Grid>
             <Grid item xs={12}>
                 <Table>
