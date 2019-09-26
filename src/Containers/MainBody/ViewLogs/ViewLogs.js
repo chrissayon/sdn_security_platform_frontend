@@ -242,12 +242,74 @@ export default function SimpleSelect() {
         })
     }
 
+    const portDiffPost = () => {
+        axios.post('http://127.0.0.1:8000/sdn_communication/port_diff/',{
+            data: { 
+                'maxRecords' : maxRecords,
+                'startDateYear' : startDate.getFullYear(),
+                'startDateMonth' : startDate.getMonth() + 1,
+                'startDateDay' : startDate.getDate(),
+                'endDateYear' : endDate.getFullYear(),
+                'endDateMonth' : endDate.getMonth() + 1,
+                'endDateDay' : endDate.getDate(),
+                'port_no' : portValue.portValue,
+            },
+        })
+        .then((response) => {
+            // console.log(response)
+            handleLogChange(response.data)
+            setHeader(
+                <TableRow>
+                    <TableCell>Row Number</TableCell>
+                    <TableCell>Port Number</TableCell>
+                    <TableCell>TX Packet</TableCell>
+                    <TableCell>TX Bytes</TableCell>
+                    <TableCell>TX Drop</TableCell>
+                    <TableCell>TX Errors</TableCell>
+                    <TableCell>RX Packets</TableCell>
+                    <TableCell>RX Bytes</TableCell>
+                    <TableCell>RX Drop</TableCell>
+                    <TableCell>RX Errors</TableCell>
+                    <TableCell>RX CRC Error</TableCell>
+                    <TableCell>RX Over Error</TableCell>
+                    <TableCell>RX Frame Error</TableCell>
+                    <TableCell>Time Interval</TableCell>
+                    <TableCell>Date Created</TableCell>
+                </TableRow>
+            )
+            console.log(response.data)
+            setBody(
+                response.data.map((arrayValue, index) => (
+                    <TableRow key={index}>
+                        <TableCell>{index}</TableCell>
+                        <TableCell>{arrayValue.port_no}</TableCell>
+                        <TableCell>{arrayValue.tx_packets}</TableCell>
+                        <TableCell>{arrayValue.tx_bytes}</TableCell>
+                        <TableCell>{arrayValue.tx_dropped}</TableCell>
+                        <TableCell>{arrayValue.tx_errors}</TableCell>
+                        <TableCell>{arrayValue.rx_packets}</TableCell>
+                        <TableCell>{arrayValue.rx_bytes}</TableCell>
+                        <TableCell>{arrayValue.rx_dropped}</TableCell>
+                        <TableCell>{arrayValue.rx_errors}</TableCell>
+                        <TableCell>{arrayValue.rx_crc_err}</TableCell>
+                        <TableCell>{arrayValue.rx_over_err}</TableCell>
+                        <TableCell>{arrayValue.rx_frame_err}</TableCell>
+                        <TableCell>{arrayValue.time_interval}</TableCell>
+                        <TableCell>{arrayValue.created}</TableCell>
+                        <TableCell>{moment(arrayValue.created).format('DD/MM/YYYY h:mm:ss')}</TableCell>
+                    </TableRow>
+                ))
+            )
+        })
+    }
+
     const logClicked = () => {
         // console.log(values)
         // console.log(formatDate(startDate))
         // console.log(formatDate(endDate))
         // console.log(maxRecords)
         setViewLogs(true)
+        console.log(values.statType)
         if(values.statType === 'flow_aggregate') {
             flowAggPost()
         } else if (values.statType === 'flow_aggregate_diff') {
@@ -255,7 +317,8 @@ export default function SimpleSelect() {
         } else if (values.statType === 'port_stats') {
             portPost()
         } else if (values.statType === 'port_diff') {
-            console.log(3)
+            console.log('entered')
+            portDiffPost()
         }
 
   }
@@ -285,7 +348,7 @@ export default function SimpleSelect() {
                         <MenuItem value={"flow_aggregate_diff"}>Flow Aggregate Difference Statistics</MenuItem>
                         
                         <MenuItem value={"port_stats"}>Port Statistics</MenuItem>
-                        <MenuItem value={"port_difference"}>Port Difference Statistics</MenuItem>
+                        <MenuItem value={"port_diff"}>Port Difference Statistics</MenuItem>
                         {/* <MenuItem value={"flow_stats"}>Flow Statistics</MenuItem> */}
                             
                         </Select>
