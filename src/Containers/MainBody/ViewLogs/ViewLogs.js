@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
   },
   formControl: {
-    paddingRight: 20,
+    marginRight: 50,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -43,7 +43,11 @@ export default function SimpleSelect() {
     
     //State for dropdown selection of stats
     const [values, setValues] = React.useState({
-        statType: '',
+        statType: 'flow_aggregate',
+    });
+
+    const [portValue, setPortValues] = React.useState({
+        portValue: 'All',
     });
 
     //State for start and enddate information
@@ -80,13 +84,19 @@ export default function SimpleSelect() {
         setMaxRecords(parseInt(event.target.value))
     }
 
-    
+    // Handler change for port selector 
+    const handlePortValue = event => {
+        setPortValues(oldValues => ({
+            ...oldValues,
+            [event.target.name]: event.target.value,
+        }));
+    }
     
     // Handler for stat selection
     const handleChange = event => {
         setValues(oldValues => ({
-        ...oldValues,
-        [event.target.name]: event.target.value,
+            ...oldValues,
+            [event.target.name]: event.target.value,
         }));
     };
 
@@ -95,32 +105,11 @@ export default function SimpleSelect() {
         setLogData(responseData)
     }
 
-    const formatDate = (date) => {
-        var d = new Date(date),
-            month = '' + (d.getMonth() + 1),
-            day = '' + d.getDate(),
-            year = d.getFullYear();
-
-        if (month.length < 2) 
-            month = '0' + month;
-        if (day.length < 2) 
-            day = '0' + day;
-
-        return [year, month, day].join('-');
-    }
-
     // React.useEffect(() => {
     //     console.log(logData)
     // }, [logData])
 
-    const logClicked = () => {
-        // console.log(values)
-        // console.log(formatDate(startDate))
-        // console.log(formatDate(endDate))
-        // console.log(maxRecords)
-        setViewLogs(true)
-
-    if(values.statType === 'flow_aggregate'){
+    const flowAggPost = () => {
         axios.post('http://127.0.0.1:8000/sdn_communication/flow_agg_stats/',{
             data: { 
                 'maxRecords' : maxRecords,
@@ -154,71 +143,176 @@ export default function SimpleSelect() {
                 ))
             )
         })
-    } 
+    }
+
+    const flowAggDiffPost = () => {
+        axios.post('http://127.0.0.1:8000/sdn_communication/flow_agg_diff/',{
+            data: { 
+                'maxRecords' : maxRecords,
+                'startDateYear' : startDate.getFullYear(),
+                'startDateMonth' : startDate.getMonth() + 1,
+                'startDateDay' : startDate.getDate(),
+                'endDateYear' : endDate.getFullYear(),
+                'endDateMonth' : endDate.getMonth() + 1,
+                'endDateDay' : endDate.getDate(),
+            },
+        })
+        .then((response) => {
+            // console.log(response)
+            handleLogChange(response.data)
+            setHeader(
+                <TableRow>
+                    <TableCell>Row Number</TableCell>
+                    <TableCell>Packet Count</TableCell>
+                    <TableCell>Byte Count</TableCell>
+                    <TableCell>Time Interval</TableCell>
+                    <TableCell>Date Created</TableCell>
+                </TableRow>
+            )
+            setBody(
+                response.data.map((arrayValue, index) => (
+                    <TableRow key={index}>
+                        <TableCell>{index}</TableCell>
+                        <TableCell>{arrayValue.packet_count}</TableCell>
+                        <TableCell>{arrayValue.byte_count}</TableCell>
+                        <TableCell>{arrayValue.time_interval}</TableCell>
+                        <TableCell>{moment(arrayValue.created).format('DD/MM/YYYY h:mm:ss')}</TableCell>
+                    </TableRow>
+                ))
+            )
+        })
+    }
+
+    const portPost = () => {
+        axios.post('http://127.0.0.1:8000/sdn_communication/port_stats/',{
+            data: { 
+                'maxRecords' : maxRecords,
+                'startDateYear' : startDate.getFullYear(),
+                'startDateMonth' : startDate.getMonth() + 1,
+                'startDateDay' : startDate.getDate(),
+                'endDateYear' : endDate.getFullYear(),
+                'endDateMonth' : endDate.getMonth() + 1,
+                'endDateDay' : endDate.getDate(),
+            },
+        })
+        .then((response) => {
+            // console.log(response)
+            handleLogChange(response.data)
+            setHeader(
+                <TableRow>
+                    <TableCell>Row Number</TableCell>
+                    <TableCell>Port Number</TableCell>
+                    <TableCell>TX Packet</TableCell>
+                    <TableCell>TX Bytes</TableCell>
+                    <TableCell>TX Drop</TableCell>
+                    <TableCell>TX Errors</TableCell>
+                    <TableCell>RX Packets</TableCell>
+                    <TableCell>RX Bytes</TableCell>
+                    <TableCell>RX Drop</TableCell>
+                    <TableCell>RX Errors</TableCell>
+                    <TableCell>RX CRC Error</TableCell>
+                    <TableCell>RX Over Error</TableCell>
+                    <TableCell>RX Frame Error</TableCell>
+                    <TableCell>Date Created</TableCell>
+                </TableRow>
+            )
+            console.log(response.data)
+            // setBody(
+            //     response.data.map((arrayValue, index) => (
+            //         <TableRow key={index}>
+            //             <TableCell>{index}</TableCell>
+            //             <TableCell>{arrayValue.packet_count}</TableCell>
+            //             <TableCell>{arrayValue.byte_count}</TableCell>
+            //             <TableCell>{arrayValue.time_interval}</TableCell>
+            //             <TableCell>{moment(arrayValue.created).format('DD/MM/YYYY h:mm:ss')}</TableCell>
+            //         </TableRow>
+            //     ))
+            // )
+        })
+    }
+
+    const logClicked = () => {
+        // console.log(values)
+        // console.log(formatDate(startDate))
+        // console.log(formatDate(endDate))
+        // console.log(maxRecords)
+        setViewLogs(true)
+        if(values.statType === 'flow_aggregate') {
+            flowAggPost()
+        } else if (values.statType === 'flow_aggregate_diff') {
+            flowAggDiffPost()
+        } else if (values.statType === 'port_stats') {
+            portPost()
+        } else if (values.statType === 'port_diff') {
+            console.log(3)
+        }
+
   }
 
     return (
         <Grid container spacing={3}>
             <Grid item xs={12}>
                 <form autoComplete="off">
-                <FormControl >
-                    <InputLabel shrink>
-                        Statistic Type
-                    </InputLabel>
-                    <Select
-                        value={values.statType}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'statType',
-                            id: 'statTypeID',
-                        }}
-                        displayEmpty
-                        name=""
-                        className={classes.selectEmpty}
-                    >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
+                    <FormControl >
+                        <InputLabel shrink>
+                            Statistic Type
+                        </InputLabel>
+                        <Select
+                            value={values.statType}
+                            onChange={handleChange}
+                            inputProps={{
+                                name: 'statType',
+                                id: 'statTypeID',
+                            }}
+                            displayEmpty
+                            name=""
+                            className={classes.selectEmpty}
+                        >
+
+                       
                         <MenuItem value={"flow_aggregate"}>Flow Aggregate Statistics</MenuItem>
-                        <MenuItem value={"port_stats"}>Port Statistics</MenuItem>
-                        <MenuItem value={"flow stats"}>Flow Statistics</MenuItem>
-                        <MenuItem value={"attack_notifications"}>Attack Notifications</MenuItem>
                         <MenuItem value={"flow_aggregate_diff"}>Flow Aggregate Difference Statistics</MenuItem>
+                        
+                        <MenuItem value={"port_stats"}>Port Statistics</MenuItem>
                         <MenuItem value={"port_difference"}>Port Difference Statistics</MenuItem>
-                    </Select>
-                    <FormHelperText>Select desired data</FormHelperText>
-                </FormControl>
+                        {/* <MenuItem value={"flow_stats"}>Flow Statistics</MenuItem> */}
+                            
+                        </Select>
+                        <FormHelperText>Select desired data</FormHelperText>
+                    </FormControl>
                 </form>
             </Grid>
             
+
+
             <Grid item xs={12}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <KeyboardDatePicker 
-                    className={classes.formControl}
-                    disableToolbar
-                    variant="inline"
-                    format="MM/dd/yyyy"
-                    margin="normal"
-                    id="date-picker-inline"
-                    label="Start Date"
-                    value={startDate}
-                    onChange={handleStartDateChange}
-                    KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                    }}
+                        className={classes.formControl}
+                        disableToolbar
+                        variant="inline"
+                        format="MM/dd/yyyy"
+                        margin="normal"
+                        id="date-picker-inline"
+                        label="Start Date"
+                        value={startDate}
+                        onChange={handleStartDateChange}
+                        KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                        }}
                     />
                     <KeyboardDatePicker
-                    disableToolbar
-                    variant="inline"
-                    format="MM/dd/yyyy"
-                    margin="normal"
-                    id="date-picker-inline"
-                    label="End Date"
-                    value={endDate}
-                    onChange={handleEndDateChange}
-                    KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                    }}
+                        disableToolbar
+                        variant="inline"
+                        format="MM/dd/yyyy"
+                        margin="normal"
+                        id="date-picker-inline"
+                        label="End Date"
+                        value={endDate}
+                        onChange={handleEndDateChange}
+                        KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                        }}
                     />
                 </MuiPickersUtilsProvider>
             </Grid>
@@ -231,11 +325,43 @@ export default function SimpleSelect() {
                     type="number"
                     onChange={handleRecordChange}
                 />
+                
             </Grid>
+
             <Grid item xs={12}>
-                <Button variant="outlined" onClick={logClicked}>
+                <Button 
+                    variant="outlined" 
+                    className={classes.formControl} 
+                    onClick={logClicked}
+                >
                     View Logs
                 </Button>
+               
+                <FormControl >
+                    <InputLabel shrink>
+                        Statistic Type
+                    </InputLabel>
+                    <Select
+                        value={portValue.portValue}
+                        onChange={handlePortValue}
+                        inputProps={{
+                            name: 'portValue',
+                            id: 'portValueID',
+                        }}
+                        displayEmpty
+                        name=""
+                        // className={classes.selectEmpty}
+                    >
+                        <MenuItem value="All">
+                            <em>All</em>
+                        </MenuItem>
+                        <MenuItem value={"1"}>Port 1</MenuItem>
+                        <MenuItem value={"2"}>Port 2</MenuItem>
+                        <MenuItem value={"3"}>Port 3</MenuItem>
+                        <MenuItem value={"LOCAL"}>Port LOCAL</MenuItem>
+                      </Select>
+                    <FormHelperText>Select desired data</FormHelperText>
+                </FormControl>
             </Grid>
             <Grid item xs={12}>
                 <Table>
