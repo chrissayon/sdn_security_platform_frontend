@@ -193,6 +193,7 @@ export default function SimpleSelect() {
                 'endDateYear' : endDate.getFullYear(),
                 'endDateMonth' : endDate.getMonth() + 1,
                 'endDateDay' : endDate.getDate(),
+                'port_no' : portValue.portValue,
             },
         })
         .then((response) => {
@@ -217,17 +218,27 @@ export default function SimpleSelect() {
                 </TableRow>
             )
             console.log(response.data)
-            // setBody(
-            //     response.data.map((arrayValue, index) => (
-            //         <TableRow key={index}>
-            //             <TableCell>{index}</TableCell>
-            //             <TableCell>{arrayValue.packet_count}</TableCell>
-            //             <TableCell>{arrayValue.byte_count}</TableCell>
-            //             <TableCell>{arrayValue.time_interval}</TableCell>
-            //             <TableCell>{moment(arrayValue.created).format('DD/MM/YYYY h:mm:ss')}</TableCell>
-            //         </TableRow>
-            //     ))
-            // )
+            setBody(
+                response.data.map((arrayValue, index) => (
+                    <TableRow key={index}>
+                        <TableCell>{index}</TableCell>
+                        <TableCell>{arrayValue.port_no}</TableCell>
+                        <TableCell>{arrayValue.tx_packets}</TableCell>
+                        <TableCell>{arrayValue.tx_bytes}</TableCell>
+                        <TableCell>{arrayValue.tx_dropped}</TableCell>
+                        <TableCell>{arrayValue.tx_errors}</TableCell>
+                        <TableCell>{arrayValue.rx_packets}</TableCell>
+                        <TableCell>{arrayValue.rx_bytes}</TableCell>
+                        <TableCell>{arrayValue.rx_dropped}</TableCell>
+                        <TableCell>{arrayValue.rx_errors}</TableCell>
+                        <TableCell>{arrayValue.rx_crc_err}</TableCell>
+                        <TableCell>{arrayValue.rx_over_err}</TableCell>
+                        <TableCell>{arrayValue.rx_frame_err}</TableCell>
+                        <TableCell>{arrayValue.created}</TableCell>
+                        <TableCell>{moment(arrayValue.created).format('DD/MM/YYYY h:mm:ss')}</TableCell>
+                    </TableRow>
+                ))
+            )
         })
     }
 
