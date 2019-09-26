@@ -17,6 +17,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import moment from 'moment'
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -136,7 +137,7 @@ export default function SimpleSelect() {
             handleLogChange(response.data)
             setHeader(
                 <TableRow>
-                    <TableCell>Cell Number</TableCell>
+                    <TableCell>Row Number</TableCell>
                     <TableCell>Packet Count</TableCell>
                     <TableCell>Byte Count</TableCell>
                     <TableCell>Date Created</TableCell>
@@ -148,20 +149,10 @@ export default function SimpleSelect() {
                         <TableCell>{index}</TableCell>
                         <TableCell>{arrayValue.packet_count}</TableCell>
                         <TableCell>{arrayValue.byte_count}</TableCell>
-                        <TableCell>{arrayValue.created}</TableCell>
+                        <TableCell>{moment(arrayValue.created).format('DD/MM/YYYY h:mm:ss')}</TableCell>
                     </TableRow>
                 ))
             )
-            // setBody(
-            //     viewLogs.map(row => (
-            //         <TableRow>
-            //             <TableCell>row.</TableCell>
-            //         </TableRow>
-            //     ))
-            // )
-            // console.log(logData)
-            
-
         })
     } 
   }
