@@ -10,6 +10,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import TextField from '@material-ui/core/TextField';
 
 import FlowAggregateGraph from '../../../Components/Graph/FlowAggregateGraph'
+import PortGraph from '../../../Components/Graph/PortGraph'
 
 import axios from 'axios'
 
@@ -44,7 +45,37 @@ const useStyles = makeStyles(theme => ({
 export default function LiveMonitoring() {
     const classes = useStyles();
     
-    const [graphPoint, setGraphPoint] = React.useState(null);
+    const [graphPoint, setGraphPoint] = React.useState(5);
+    const [graphRender, setGraphRender] = React.useState(null)
+    const [graphChange, setGraphChange] = React.useState(null)
+
+    const handleGraphPoint = (event) => {
+        setGraphPoint(parseInt(event.target.value))
+    }
+    
+    const portButtonClicked = () => {
+        setGraphChange("portGraph")
+    }
+
+    const portAggregateButtonClicked = () => {
+        setGraphChange("portAggregateGraph")
+    }
+
+    const flowAggregateButtonClicked = () => {
+        setGraphChange("flowAggregateGraph")
+    }
+
+    const handleGraphChange = () => {
+        if(graphChange === "portGraph")
+            setGraphRender(<PortGraph maxRecords={graphPoint} />)
+        else if(graphChange === "flowAggregateGraph")
+            setGraphRender(<FlowAggregateGraph maxRecords={graphPoint}/>)
+    }
+
+    React.useEffect(() => {
+        handleGraphChange()
+        console.log(graphChange)
+    }, [graphChange, graphPoint]);
 
     return (
         <Grid container spacing={3}>
@@ -55,13 +86,10 @@ export default function LiveMonitoring() {
                     color="primary"
                     aria-label="full-width contained primary button group"
                 >
-                    <Button>Port Graph</Button>
+                    <Button onClick={portButtonClicked} >Port Graph</Button>
                     <Button>Port Aggregate Graph</Button>
-                    <Button>Flow Aggregate Graph</Button>
+                    <Button onClick={flowAggregateButtonClicked}>Flow Aggregate Graph</Button>
                 </ButtonGroup>
-            </Grid>
-            <Grid item xs={12}>
-                <FlowAggregateGraph apple={1}/>
             </Grid>
             <Grid item xs={12}>
                 <TextField
@@ -70,9 +98,13 @@ export default function LiveMonitoring() {
                     helperText="Please input an integer"
                     margin="normal"
                     type="number"
+                    value={graphPoint}
+                    onChange={handleGraphPoint}
                 />
             </Grid>
-            
+            <Grid item xs={12}>
+                {graphRender}
+            </Grid>
         </Grid>
     );
 }
