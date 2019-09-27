@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SimpleSelect() {
+export default function ViewLogs() {
     const classes = useStyles();
     
     //State for dropdown selection of stats

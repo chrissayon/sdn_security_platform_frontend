@@ -42,6 +42,7 @@ import sdnGraph from '../../Components/Graph/Graph';
 import MLConfiguration from '../MainBody/MLConfiguration/MLConfiguration'
 import NotificationSetting from '../MainBody/NotificationSettings/NotificationSettings'
 import ViewLogs from '../MainBody/ViewLogs/ViewLogs'
+import LiveMonitoring from '../MainBody/LiveMonitoring/LiveMonitoring'
 
 const drawerWidth = 240;
 
@@ -181,7 +182,7 @@ const MainBody = (props) => {
   const handlerLink = (index) => {
     const urlLink = buttonList[index].route;
     // console.log(urlLink);
-    console.log(props)
+    // console.log(props)
     props.history.push(urlLink);
   }
 
@@ -271,6 +272,7 @@ const MainBody = (props) => {
               <Route path={'/ml-configuration'} component={MLConfiguration} />
               <Route path={'/notification-settings'} component={NotificationSetting} />
               <Route path={'/view-logs'} component={ViewLogs} />
+              <Route path={'/live-monitoring'} component={LiveMonitoring} />
               <Route exact path={'/'} component={null}/>
           </Switch>
         
