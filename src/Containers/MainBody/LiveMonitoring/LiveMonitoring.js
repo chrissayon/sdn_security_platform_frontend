@@ -12,22 +12,8 @@ import TextField from '@material-ui/core/TextField';
 import FlowAggregateGraph from '../../../Components/Graph/FlowAggregateGraph'
 import PortGraph from '../../../Components/Graph/PortGraph'
 
-import axios from 'axios'
-
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
-import moment from 'moment'
-
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -95,7 +81,7 @@ export default function LiveMonitoring() {
                     aria-label="full-width contained primary button group"
                 >
                     <Button onClick={portButtonClicked} >Port Graph</Button>
-                    <Button>Port Aggregate Graph</Button>
+                    <Button>Port Difference Graph</Button>
                     <Button onClick={flowAggregateButtonClicked}>Flow Aggregate Graph</Button>
                 </ButtonGroup>
             </Grid>

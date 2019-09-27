@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Tables from '../../../Components/UI/Tables/Tables'
+import DescriptionTables from '../../../Components/UI/Tables/DescriptionTables'
+
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
@@ -78,7 +80,7 @@ class SdnSettings extends Component {
                 <Button variant="outlined" onClick={this.setControllerAddress}>
                     Set Controller Address
                 </Button>
-                <Tables headerValue={ this.props.get } />
+                <DescriptionTables headerValue={ this.props.get } />
             </React.Fragment>
         )
     }

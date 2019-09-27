@@ -86,6 +86,7 @@ const PortGraph = (props) => {
         })
     }
 
+    //Periodically do post requests every 5 seconds
     React.useEffect(() => {
         const interval = setInterval(() => {
             portPost()
@@ -105,6 +106,22 @@ const PortGraph = (props) => {
         <Grid container >
             <Grid item xs={12} className={classes.graphBox}>
                 <LineChart width={600} height={400} data={graphData1}>
+                    <Line type="monotone" dataKey="rx_bytes" stroke="#8884d8" />
+                    <CartesianGrid stroke="#ccc" />
+                    <XAxis dataKey="date" angle={-45} height={50} textAnchor="end"/>
+                    <YAxis />
+                </LineChart>
+            </Grid>
+            <Grid item xs={12} className={classes.graphBox}>
+                <LineChart width={600} height={400} data={graphData2}>
+                    <Line type="monotone" dataKey="rx_bytes" stroke="#8884d8" />
+                    <CartesianGrid stroke="#ccc" />
+                    <XAxis dataKey="date" angle={-45} height={50} textAnchor="end"/>
+                    <YAxis />
+                </LineChart>
+            </Grid>
+            <Grid item xs={12} className={classes.graphBox}>
+                <LineChart width={600} height={400} data={graphData3}>
                     <Line type="monotone" dataKey="rx_bytes" stroke="#8884d8" />
                     <CartesianGrid stroke="#ccc" />
                     <XAxis dataKey="date" angle={-45} height={50} textAnchor="end"/>
