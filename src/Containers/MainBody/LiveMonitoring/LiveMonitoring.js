@@ -11,6 +11,7 @@ import TextField from '@material-ui/core/TextField';
 
 import FlowAggregateGraph from '../../../Components/Graph/FlowAggregateGraph'
 import PortGraph from '../../../Components/Graph/PortGraph'
+import PortDifferenceGraph from '../../../Components/Graph/PortDifferenceGraph'
 
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
@@ -49,8 +50,8 @@ export default function LiveMonitoring() {
         setGraphChange("portGraph")
     }
 
-    const portAggregateButtonClicked = () => {
-        setGraphChange("portAggregateGraph")
+    const portDifferenceButtonClicked = () => {
+        setGraphChange("portDifferenceGraph")
     }
 
     const flowAggregateButtonClicked = () => {
@@ -61,6 +62,8 @@ export default function LiveMonitoring() {
     const handleGraphChange = () => {
         if(graphChange === "portGraph")
             setGraphRender(<PortGraph maxRecords={graphPoint} />)
+        else if(graphChange === "portDifferenceGraph")
+            setGraphRender(<PortDifferenceGraph maxRecords={graphPoint} />)
         else if(graphChange === "flowAggregateGraph")
             setGraphRender(<FlowAggregateGraph maxRecords={graphPoint}/>)
     }
@@ -81,7 +84,7 @@ export default function LiveMonitoring() {
                     aria-label="full-width contained primary button group"
                 >
                     <Button onClick={portButtonClicked} >Port Graph</Button>
-                    <Button>Port Difference Graph</Button>
+                    <Button onClick={portDifferenceButtonClicked}>Port Difference Graph</Button>
                     <Button onClick={flowAggregateButtonClicked}>Flow Aggregate Graph</Button>
                 </ButtonGroup>
             </Grid>

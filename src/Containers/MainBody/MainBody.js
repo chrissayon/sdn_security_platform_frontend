@@ -2,8 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 
 // Route Related
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
-import { withRouter } from 'react-router-dom'
+import { Route,  Switch , withRouter } from 'react-router-dom';
 
 // CSS Related
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -126,36 +125,6 @@ const MainBody = (props) => {
             icon: <ListItemIcon><SettingsApplicationsIcon /></ListItemIcon>
         },
         {
-            name: 'Port Graph',
-            route: '/port-graph',
-            icon: <ListItemIcon><ComputerIcon /></ListItemIcon>
-        },
-        {
-            name: 'Port Table',
-            route: '/port-table',
-            icon: <ListItemIcon><ComputerIcon /></ListItemIcon>
-        },
-        {
-            name: 'Flow Aggregate Graph',
-            route: '/flow-aggregate-graph',
-            icon: <ListItemIcon><ComputerIcon /></ListItemIcon>
-        },
-        {
-            name: 'Flow Table',
-            route: '/flow-table',
-            icon: <ListItemIcon><ComputerIcon /></ListItemIcon>
-        },
-        {
-            name: 'Settings',
-            route: '/settings',
-            icon: <ListItemIcon><SettingsApplicationsIcon /></ListItemIcon>
-        },
-        {
-            name: 'SDN Configuration',
-            route: '/sdn-configuration',
-            icon: <ListItemIcon><SettingsApplicationsIcon /></ListItemIcon>
-        },
-        {
           name: 'ML Configuration',
           route: '/ml-configuration',
           icon: <ListItemIcon><BuildIcon /></ListItemIcon>
@@ -263,12 +232,8 @@ const MainBody = (props) => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         
-          <Switch>                            
-              <Route path={'/flow-table'} component={FlowTable}/>
-              <Route path={'/port-table'} component={PortTable}/>
-              <Route path={'/flow-aggregate-graph'} component={FlowAggregateGraph}/>
+          <Switch>
               <Route path={'/sdn-settings'} component={SdnSettings}/>
-              <Route path={'/graphs'} component={sdnGraph}/>
               <Route path={'/ml-configuration'} component={MLConfiguration} />
               <Route path={'/notification-settings'} component={NotificationSetting} />
               <Route path={'/view-logs'} component={ViewLogs} />
