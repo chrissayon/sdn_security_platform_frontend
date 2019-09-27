@@ -45,10 +45,16 @@ const useStyles = makeStyles(theme => ({
 export default function LiveMonitoring() {
     const classes = useStyles();
     
+    // State for amount of points to render on graph
     const [graphPoint, setGraphPoint] = React.useState(5);
+
+    // Holds actual component to render on UI
     const [graphRender, setGraphRender] = React.useState(null)
+
+    // State for which button has been pressed
     const [graphChange, setGraphChange] = React.useState(null)
 
+    // Handles getting value from text field and putting it into graphs
     const handleGraphPoint = (event) => {
         setGraphPoint(parseInt(event.target.value))
     }
@@ -65,6 +71,7 @@ export default function LiveMonitoring() {
         setGraphChange("flowAggregateGraph")
     }
 
+    // Selects which graph to render
     const handleGraphChange = () => {
         if(graphChange === "portGraph")
             setGraphRender(<PortGraph maxRecords={graphPoint} />)
@@ -72,6 +79,7 @@ export default function LiveMonitoring() {
             setGraphRender(<FlowAggregateGraph maxRecords={graphPoint}/>)
     }
 
+    // Forces a render when a button has been pressed or graph points have changed
     React.useEffect(() => {
         handleGraphChange()
         console.log(graphChange)
