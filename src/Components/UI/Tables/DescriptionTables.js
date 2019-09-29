@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import moment from 'moment'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,6 +24,10 @@ const header = ['ID', 'Description', 'Manufacturer Description', 'Hardware Descr
 function HeaderValueTable(props) {
   const classes = useStyles();
   // console.log(props);
+  const data = props.headerValue
+  data.created = moment(props.created).format('DD/MM/YYYY h:mm:ss')
+  data.last_modified = moment(props.last_modified).format('DD/MM/YYYY h:mm:ss')
+
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
