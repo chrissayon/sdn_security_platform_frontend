@@ -34,6 +34,7 @@ import EventNoteIcon from '@material-ui/icons/EventNote';
 import ListAllIcon from '@material-ui/icons/ListAlt';
 import ComputerIcon from '@material-ui/icons/Computer';
 import NotificationIcon from '@material-ui/icons/Notifications'
+import CompareArrows from '@material-ui/icons/CompareArrows'
 
 // Notification Popup
 import NotificationPopover from './NotificationPopUp/NotificationPopover';
@@ -51,6 +52,7 @@ import AlarmInformation from './AlarmInformation/AlarmInformation'
 import NotificationSetting from '../MainBody/NotificationSettings/NotificationSettings';
 import ViewLogs from '../MainBody/ViewLogs/ViewLogs';
 import LiveMonitoring from '../MainBody/LiveMonitoring/LiveMonitoring';
+import FlowConfiguration from './FlowConfiguration/FlowConfiguration';
 
 const drawerWidth = 240;
 
@@ -134,6 +136,11 @@ const MainBody = (props) => {
           route: '/sdn-settings',
           icon: <ListItemIcon><SettingsApplicationsIcon /></ListItemIcon>
       },
+      {
+        name: 'Flow Configuration',
+        route: '/flow-configuration',
+        icon: <ListItemIcon><CompareArrows /></ListItemIcon>
+    },
       {
         name: 'Alarm Information',
         route: '/alarm-information',
@@ -260,6 +267,7 @@ const MainBody = (props) => {
             <Route path={'/view-logs'} component={ViewLogs} />
             <Route path={'/live-monitoring'} component={LiveMonitoring} />
             <Route path={'/alarm-information'} component={AlarmInformation} />
+            <Route path={'/flow-configuration'} component={FlowConfiguration} />
             <Route exact path={'/'} component={null}/>
         </Switch>
       </main>
