@@ -22,19 +22,16 @@ function handleClick(event) {
     setAnchorEl(event.currentTarget);
     // dispatch({ type: notificationRequests })
     props.notificationRequests();
-  }
+};
 
-  function handleClose() {
+function handleClose() {
     setAnchorEl(null);
-  }
-
+};
 
 const open = Boolean(anchorEl);
-
-
 const id = open ? 'simple-popover' : undefined;
 
-console.log(props.notifications)
+console.log(props.notifications);
 let checking = (props.notifications.machineLearningTriggered === undefined)
 console.log(checking)
 

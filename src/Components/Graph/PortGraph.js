@@ -18,10 +18,10 @@ const useStyles = makeStyles(theme => ({
 const PortGraph = (props) => {
     const classes = useStyles();
 
-    const [graphData1 , setGraphData1] = React.useState({})
-    const [graphData2 , setGraphData2] = React.useState({})
-    const [graphData3 , setGraphData3] = React.useState({})
-    const [graphDataLocal , setGraphDataLocal] = React.useState({})
+    const [graphData1 , setGraphData1] = React.useState({});
+    const [graphData2 , setGraphData2] = React.useState({});
+    const [graphData3 , setGraphData3] = React.useState({});
+    const [graphDataLocal , setGraphDataLocal] = React.useState({});
 
     const portPost = () => {
         axios.post('http://127.0.0.1:8000/sdn_communication/port_graph/',{
@@ -41,21 +41,21 @@ const PortGraph = (props) => {
                     tx_bytes: arrayValue.tx_bytes,
                     date: moment(arrayValue.created).format('h:mm:ss')
                 })
-            })
-            setGraphData1(extractedGraphData1)
+            });
+            setGraphData1(extractedGraphData1);
 
             //Graph 2 Write
             const responseData2 = response.data.filter((arrayValue) => {
                 return arrayValue.port_no === "2"
-            })  
+            });
             const extractedGraphData2 = responseData2.map((arrayValue, index) => {
                 return ({
                     rx_bytes: arrayValue.rx_bytes,
                     tx_bytes: arrayValue.tx_bytes,
                     date: moment(arrayValue.created).format('h:mm:ss')
                 })
-            })
-            setGraphData2(extractedGraphData2)
+            });
+            setGraphData2(extractedGraphData2);
 
             //Graph 3 Write
             const responseData3 = response.data.filter((arrayValue) => {
@@ -73,15 +73,15 @@ const PortGraph = (props) => {
             //Graph Local Write
             const responseDataLocal = response.data.filter((arrayValue) => {
                 return arrayValue.port_no === "LOCAL"
-            })  
+            });
             const extractedGraphDataLocal = responseDataLocal.map((arrayValue, index) => {
                 return ({
                     rx_bytes: arrayValue.rx_bytes,
                     tx_bytes: arrayValue.tx_bytes,
                     date: moment(arrayValue.created).format('h:mm:ss')
                 })
-            })
-            setGraphDataLocal(extractedGraphDataLocal)
+            });
+            setGraphDataLocal(extractedGraphDataLocal);
             
         })
     }
@@ -90,16 +90,15 @@ const PortGraph = (props) => {
     React.useEffect(() => {
         const interval = setInterval(() => {
             portPost()
-            console.log(props.maxRecords)
         }, 5000);
         return () => {
           clearInterval(interval);
         };
-    }, [props.maxRecords]);
+    }, []);
     
     //Render upon initialization
     React.useEffect(() => {
-        portPost()
+        portPost();
     }, [props.maxRecords]);
 
     return (
@@ -129,7 +128,7 @@ const PortGraph = (props) => {
                 </LineChart>
             </Grid>
         </Grid>
-    )
+    );
 };
 
 export default PortGraph;

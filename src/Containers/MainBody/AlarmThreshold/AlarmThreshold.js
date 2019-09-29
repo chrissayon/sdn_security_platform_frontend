@@ -131,6 +131,7 @@ class AlarmThreshold extends Component {
                             value={this.state.inputPortThreshold}
                             onChange = {this.setPort}
                             margin="normal"
+                            type="number"
                         />
                         <TextField
                             id="standard-name"

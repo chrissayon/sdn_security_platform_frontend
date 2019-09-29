@@ -1,6 +1,12 @@
 import React from 'react';
 import clsx from 'clsx';
 
+// Network Related
+import axios from 'axios';
+
+// Date Realted
+import moment from 'moment';
+
 // Route Related
 import { Route,  Switch , withRouter } from 'react-router-dom';
 
@@ -22,26 +28,29 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications'
-import BuildIcon from '@material-ui/icons/Build'
-import EventNoteIcon from '@material-ui/icons/EventNote'
-import ListAllIcon from '@material-ui/icons/ListAlt'
-import ComputerIcon from '@material-ui/icons/Computer'
+import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
+import BuildIcon from '@material-ui/icons/Build';
+import EventNoteIcon from '@material-ui/icons/EventNote';
+import ListAllIcon from '@material-ui/icons/ListAlt';
+import ComputerIcon from '@material-ui/icons/Computer';
+import NotificationIcon from '@material-ui/icons/Notifications'
 
 // Notification Popup
-import NotificationPopover from './NotificationPopUp/NotificationPopover'
+import NotificationPopover from './NotificationPopUp/NotificationPopover';
 
-//Body Related
-import FlowTable from './Flow/FlowTable'
-import PortTable from './Port/PortTable'
-import SdnSettings from './SdnSettings/SdnSettings'
-import FlowAggregateGraph from './FlowAggregate/FlowAggregateGraph'
+// Body Related
+import FlowTable from './Flow/FlowTable';
+import PortTable from './Port/PortTable';
+import FlowAggregateGraph from './FlowAggregate/FlowAggregateGraph';
 import sdnGraph from '../../Components/Graph/Graph';
 
-import MLConfiguration from '../MainBody/MLConfiguration/MLConfiguration'
-import NotificationSetting from '../MainBody/NotificationSettings/NotificationSettings'
-import ViewLogs from '../MainBody/ViewLogs/ViewLogs'
-import LiveMonitoring from '../MainBody/LiveMonitoring/LiveMonitoring'
+// Menus/Body Related
+import SdnSettings from './SdnSettings/SdnSettings';
+import AlarmThreshold from './AlarmThreshold/AlarmThreshold';
+import AlarmInformation from './AlarmInformation/AlarmInformation'
+import NotificationSetting from '../MainBody/NotificationSettings/NotificationSettings';
+import ViewLogs from '../MainBody/ViewLogs/ViewLogs';
+import LiveMonitoring from '../MainBody/LiveMonitoring/LiveMonitoring';
 
 const drawerWidth = 240;
 
@@ -108,7 +117,7 @@ const useStyles = makeStyles(theme => ({
   title : {
     flexGrow: 1
   }
-}));
+  }));
 
 
 
@@ -118,53 +127,69 @@ const MainBody = (props) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   
+  // Holds the button list on the sidebar
   const [buttonList] = React.useState([
-        {
-            name: 'SDN Settings',
-            route: '/sdn-settings',
-            icon: <ListItemIcon><SettingsApplicationsIcon /></ListItemIcon>
-        },
-        {
-          name: 'ML Configuration',
-          route: '/ml-configuration',
-          icon: <ListItemIcon><BuildIcon /></ListItemIcon>
-        },
-        {
-          name: 'Notification Settings',
-          route: '/notification-settings',
-          icon: <ListItemIcon><EventNoteIcon /></ListItemIcon>
-        },
-        {
-          name: 'Live Monitoring',
-          route: '/live-monitoring',
-          icon: <ListItemIcon><ComputerIcon /></ListItemIcon>
-        },
-        {
-          name: 'View Logs',
-          route: '/view-logs',
-          icon: <ListItemIcon><ListAllIcon /></ListItemIcon>
-        },
-    ]);
+      {
+          name: 'SDN Settings',
+          route: '/sdn-settings',
+          icon: <ListItemIcon><SettingsApplicationsIcon /></ListItemIcon>
+      },
+      {
+        name: 'Alarm Information',
+        route: '/alarm-information',
+        icon: <ListItemIcon><NotificationIcon /></ListItemIcon>
+      },
+      {
+        name: 'Alarm Thresholds',
+        route: '/alarm-thresholds',
+        icon: <ListItemIcon><BuildIcon /></ListItemIcon>
+      },
+      {
+        name: 'Notification Settings',
+        route: '/notification-settings',
+        icon: <ListItemIcon><EventNoteIcon /></ListItemIcon>
+      },
+      {
+        name: 'Live Monitoring',
+        route: '/live-monitoring',
+        icon: <ListItemIcon><ComputerIcon /></ListItemIcon>
+      },
+      {
+        name: 'View Logs',
+        route: '/view-logs',
+        icon: <ListItemIcon><ListAllIcon /></ListItemIcon>
+      },
+  ]);
 
-
-
+  //Changes the URL link when a button is pressed
   const handlerLink = (index) => {
     const urlLink = buttonList[index].route;
     // console.log(urlLink);
-    // console.log(props)
     props.history.push(urlLink);
-  }
+  };
 
+  //Handles when drawer opens
   function handleDrawerOpen() {
     setOpen(true);
-  }
+  };
 
+  //Handles when drawer is closed
   function handleDrawerClose() {
     setOpen(false);
-  }
+  };
 
+  //Ping notification
+  const handleNotification = () => {
+    axios.get('http://127.0.0.1:8000/sdn_communication/flow_agg_diff_graph/')
+    .then((response) => {})  
+    
+    
+
+  };
+  
   return (
     <div className={classes.root}>
+      {/* Top bar menu */}
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -190,14 +215,11 @@ const MainBody = (props) => {
           </Typography>
           
           <NotificationPopover />
-       
+      
         </Toolbar>
       </AppBar>
-
-
-
-
-
+          
+         {/* Sidebar */}
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -213,34 +235,33 @@ const MainBody = (props) => {
         open={open}
       >
         <div className={classes.toolbar}>
-            <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-            </IconButton>
+          <IconButton onClick={handleDrawerClose}>
+          {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
         </div>
         <Divider />
         <List>
-            {buttonList.map((text, index) => (
-                <ListItem button onClick={() => handlerLink(index)} key={index}>
-                  { buttonList[index].icon } 
-                   {/* { console.log(buttonList[index].icon) } */}
-                 
-                  <ListItemText primary={buttonList[index].name} />
-                </ListItem>
-            ))}
+          {buttonList.map((text, index) => (
+              <ListItem button onClick={() => handlerLink(index)} key={index}>
+                { buttonList[index].icon } 
+                  {/* { console.log(buttonList[index].icon) } */}
+                
+                <ListItemText primary={buttonList[index].name} />
+              </ListItem>
+          ))}
         </List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        
-          <Switch>
-              <Route path={'/sdn-settings'} component={SdnSettings}/>
-              <Route path={'/ml-configuration'} component={MLConfiguration} />
-              <Route path={'/notification-settings'} component={NotificationSetting} />
-              <Route path={'/view-logs'} component={ViewLogs} />
-              <Route path={'/live-monitoring'} component={LiveMonitoring} />
-              <Route exact path={'/'} component={null}/>
-          </Switch>
-        
+        <Switch>
+            <Route path={'/sdn-settings'} component={SdnSettings}/>
+            <Route path={'/alarm-thresholds'} component={AlarmThreshold} />
+            <Route path={'/notification-settings'} component={NotificationSetting} />
+            <Route path={'/view-logs'} component={ViewLogs} />
+            <Route path={'/live-monitoring'} component={LiveMonitoring} />
+            <Route path={'/alarm-information'} component={AlarmInformation} />
+            <Route exact path={'/'} component={null}/>
+        </Switch>
       </main>
     </div>
   );

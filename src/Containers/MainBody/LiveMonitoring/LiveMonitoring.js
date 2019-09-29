@@ -9,9 +9,9 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import TextField from '@material-ui/core/TextField';
 
-import FlowAggregateGraph from '../../../Components/Graph/FlowAggregateGraph'
-import PortGraph from '../../../Components/Graph/PortGraph'
-import PortDifferenceGraph from '../../../Components/Graph/PortDifferenceGraph'
+import FlowAggregateGraph from '../../../Components/Graph/FlowAggregateGraph';
+import PortGraph from '../../../Components/Graph/PortGraph';
+import PortDifferenceGraph from '../../../Components/Graph/PortDifferenceGraph';
 
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
@@ -36,26 +36,26 @@ export default function LiveMonitoring() {
     const [graphPoint, setGraphPoint] = React.useState(5);
 
     // Holds actual component to render on UI
-    const [graphRender, setGraphRender] = React.useState(null)
+    const [graphRender, setGraphRender] = React.useState(null);
 
     // State for which button has been pressed
-    const [graphChange, setGraphChange] = React.useState(null)
+    const [graphChange, setGraphChange] = React.useState(null);
 
     // Handles getting value from text field and putting it into graphs
     const handleGraphPoint = (event) => {
-        setGraphPoint(parseInt(event.target.value))
+        setGraphPoint(parseInt(event.target.value));
     }
     
     const portButtonClicked = () => {
-        setGraphChange("portGraph")
+        setGraphChange("portGraph");
     }
 
     const portDifferenceButtonClicked = () => {
-        setGraphChange("portDifferenceGraph")
+        setGraphChange("portDifferenceGraph");
     }
 
     const flowAggregateButtonClicked = () => {
-        setGraphChange("flowAggregateGraph")
+        setGraphChange("flowAggregateGraph");
     }
 
     // Selects which graph to render
@@ -70,8 +70,8 @@ export default function LiveMonitoring() {
 
     // Forces a render when a button has been pressed or graph points have changed
     React.useEffect(() => {
-        handleGraphChange()
-        console.log(graphChange)
+        handleGraphChange();
+        // console.log(graphChange);
     }, [graphChange, graphPoint]);
 
     return (

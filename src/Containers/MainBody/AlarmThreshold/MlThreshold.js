@@ -45,16 +45,15 @@ class MLConfiguration extends Component {
         return (
             <React.Fragment>
                 <Grid container spacing={10} >
-                    <Grid item xs={6} >
+                    <Grid item xs={12} >
                         <TextField
+                            style={{marginRight: 200}}
                             id="standard-name"
                             label="Set ML Threshold"
                             value={this.state.inputMlThreshold}
                             onChange = {this.setIP}
                             margin="normal"
                         />
-                    </Grid>
-                    <Grid item xs={6} >
                         <TextField
                             id="standard-name"
                             label="Current ML Threshold Value"
@@ -65,8 +64,7 @@ class MLConfiguration extends Component {
                                 readOnly: true,
                             }}
                         />
-                    </Grid>
-                    
+                    </Grid>                    
                 </Grid>
                 <Button variant="outlined" onClick={this.setMlThreshold} xs={12}>
                     Set Machine Learning Threshold

@@ -95,7 +95,7 @@ const PortGraph = (props) => {
         return () => {
           clearInterval(interval);
         };
-    }, [props.maxRecords]);
+    }, []);
     
     //Render upon initialization
     React.useEffect(() => {
