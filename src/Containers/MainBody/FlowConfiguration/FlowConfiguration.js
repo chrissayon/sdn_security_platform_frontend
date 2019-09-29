@@ -10,13 +10,7 @@ import TextField from '@material-ui/core/TextField';
 
 import axios from 'axios'
 
-import 'date-fns';
 import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
 import moment from 'moment'
 
 import Table from '@material-ui/core/Table';
@@ -24,6 +18,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+
+import MaterialTable from 'material-table';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -45,11 +41,48 @@ export default function FlowConfiguration() {
     const [values, setValues] = React.useState({
         statType: 'flow_stats',
     });
-
-    const [portValue, setPortValues] = React.useState({
-        portValue: 'All',
-    });
     
+    const [state, setState] = React.useState({
+        columns: [
+          { title: 'Flow Header', field: 'flow_header' },
+          { title: 'Data', field: 'data' },
+        ],
+        data: [
+          {
+            flow_header: 'dpid',
+            data: '123917682137064',
+          },
+          {
+            flow_header: 'table_id',
+            data: '0',
+          },
+          {
+            flow_header: 'idle_timeout',
+            data: '0',
+          },
+          {
+            flow_header: 'hard_timeout',
+            data: '0',
+          },
+          {
+            flow_header: 'priority',
+            data: '0',
+          },
+          {
+            flow_header: 'match',
+            data: '1',
+          },
+          {
+            flow_header: 'action type',
+            data: 'OUTPUT',
+          },
+          {
+            flow_header: 'action port',
+            data: '2',
+          },
+        ],
+      });
+
     //State dictating how many records to return from the backend
     const [maxRecords, setMaxRecords] = React.useState(1)
     
@@ -68,14 +101,6 @@ export default function FlowConfiguration() {
     // Handler for record text field compinent
     const handleRecordChange = event => {
         setMaxRecords(parseInt(event.target.value))
-    }
-
-    // Handler change for port selector 
-    const handlePortValue = event => {
-        setPortValues(oldValues => ({
-            ...oldValues,
-            [event.target.name]: event.target.value,
-        }));
     }
     
     // Handler for stat selection
@@ -146,10 +171,44 @@ export default function FlowConfiguration() {
         })
     }
 
+    const flowPost = () => {
+        const dataToSend = {
+            dpid : state.data.data[0].data,
+            table_id : state.data.data[1].data,
+            idle_timeout : state.data.data[2].data,
+            hard_timeout : state.data.data[3].data,
+            priority : state.data.data[4].data,
+            match : {
+                "in_port" : state.data.data[5].data
+            },
+            actions : [{
+                "type" : state.data.data[6].data,
+                "port" : 2
+            }]
+        }           
+
+        axios.post('http://127.0.0.1:8000/sdn_communication/flow_stats/', {
+                // 'url' : 'http://127.0.0.1:6653/stats/flowentry/add',
+                // 'dpid' : 123917682137064,
+                // 'table_id' : 0,
+                // 'idle_timeout' : 0,
+                // 'hard_timeout' : 0,
+                // 'priority' : 1,
+                // 'match' : 0,
+                // 'actions' : 0
+                ...dataToSend           
+        })
+        .then((response) => {
+            console.log(response)
+        })
+    }
+
     const logClicked = () => {
         setViewLogs(true)
         if(values.statType === 'flow_stats') {
             flowStats()
+        } else if(values.statType === 'add_flow') {
+            flowPost()
         }
 
   }
@@ -182,16 +241,54 @@ export default function FlowConfiguration() {
                     </FormControl>
                 </form>
             </Grid>
-            <Grid item xs={12}>
-                <TextField
-                    id="standard-number"
-                    label="Max Records"
-                    helperText="Please input an integer"
-                    margin="normal"
-                    type="number"
-                    onChange={handleRecordChange}
-                />
-            </Grid>
+                {
+                    values.statType === 'flow_stats' ? (
+                        <Grid item xs={12}>
+                            <TextField
+                                id="standard-number"
+                                label="Max Records"
+                                helperText="Please input an integer"
+                                margin="normal"
+                                type="number"
+                                onChange={handleRecordChange}
+                            />
+                        </Grid> ) : null
+                }
+                {
+                    values.statType === 'add_flows' ? (
+                        <MaterialTable
+                            title="Flow Entry to Add"
+                            columns={state.columns}
+                            data={state.data}
+                            editable={{
+                                
+                                onRowUpdate: (newData, oldData) =>
+                                new Promise(resolve => {
+                                    setTimeout(() => {
+                                    resolve();
+                                    const data = [...state.data];
+                                    data[data.indexOf(oldData)].data = newData.data;
+                                    setState({ ...state, data });
+                                    }, 600);
+                                }),
+                                
+                            }}
+                        /> ) : null
+                }
+                {
+                    values.statType === 'delete_flows' ? (
+                        <Grid item xs={12}>
+                            <TextField
+                                id="standard-number"
+                                label="Max Records"
+                                helperText="Please input an integer"
+                                margin="normal"
+                                type="number"
+                                onChange={handleRecordChange}
+                            />
+                        </Grid> ) : null
+                }
+
             <Grid item xs={12}>
                 <Button 
                     variant="outlined" 
