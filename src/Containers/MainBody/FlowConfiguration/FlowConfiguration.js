@@ -164,7 +164,7 @@ export default function FlowConfiguration() {
                         <TableCell>{arrayValue.byte_count}</TableCell>
                         <TableCell>{arrayValue.match}</TableCell>
                         <TableCell>{arrayValue.actions}</TableCell>
-                        <TableCell>{moment(arrayValue.created).format('DD/MM/YYYY h:mm:ss')}</TableCell>
+                        <TableCell>{moment(arrayValue.created).format('DD/MM/YYYY h:mm:ss a')}</TableCell>
                     </TableRow>
                 ))
             )

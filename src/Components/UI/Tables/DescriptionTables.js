@@ -25,8 +25,8 @@ function HeaderValueTable(props) {
   const classes = useStyles();
   // console.log(props);
   const data = props.headerValue
-  data.created = moment(props.created).format('DD/MM/YYYY h:mm:ss')
-  data.last_modified = moment(props.last_modified).format('DD/MM/YYYY h:mm:ss')
+  data.created = moment(props.created).format('DD/MM/YYYY h:mm:ss a')
+  data.last_modified = moment(props.last_modified).format('DD/MM/YYYY h:mm:ss a')
 
   return (
     <Paper className={classes.root}>
