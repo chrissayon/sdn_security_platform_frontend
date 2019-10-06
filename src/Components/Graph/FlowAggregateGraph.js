@@ -39,7 +39,7 @@ const FlowAggregateGraph = (props) => {
         return () => {
           clearInterval(interval);
         };
-    }, []);
+    }, [props.maxRecords]);
 
     // Gets data when rendered
     React.useEffect(() => {
@@ -51,8 +51,25 @@ const FlowAggregateGraph = (props) => {
         <LineChart width={600} height={400} data={graphData}>
             <Line type="monotone" dataKey="packet_count" stroke="#8884d8" />
             <CartesianGrid stroke="#ccc" />
-            <XAxis dataKey="date" angle={-45} height={50} textAnchor="end"/>
-            <YAxis />
+            <XAxis 
+                        dataKey="date" 
+                        angle={-45} 
+                        height={50} 
+                        textAnchor="end"
+                        label={{ 
+                            value: 'Time', 
+                            position: 'insideBottomRight',
+                            dy: 5,
+                            offset: 0
+                        }}
+                    />
+                    <YAxis 
+                        label={{ 
+                            value: 'Total Bytes', 
+                            angle: -90, 
+                            position: 'insideLeft' 
+                        }}
+                    />
         </LineChart>
     )
 };

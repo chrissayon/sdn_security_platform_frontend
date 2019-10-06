@@ -106,7 +106,7 @@ class AlarmThreshold extends Component {
                         <TextField
                             style={{marginRight: 200}}
                             id="standard-name"
-                            label="Set Port Threshold"
+                            label="Set ML Threshold"
                             value={this.state.inputMlThreshold}
                             onChange = {this.setML}
                             margin="normal"

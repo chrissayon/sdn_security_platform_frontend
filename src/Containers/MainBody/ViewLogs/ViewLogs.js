@@ -234,7 +234,6 @@ export default function ViewLogs() {
                         <TableCell>{arrayValue.rx_crc_err}</TableCell>
                         <TableCell>{arrayValue.rx_over_err}</TableCell>
                         <TableCell>{arrayValue.rx_frame_err}</TableCell>
-                        <TableCell>{arrayValue.created}</TableCell>
                         <TableCell>{moment(arrayValue.created).format('DD/MM/YYYY h:mm:ss a')}</TableCell>
                     </TableRow>
                 ))
@@ -295,7 +294,6 @@ export default function ViewLogs() {
                         <TableCell>{arrayValue.rx_over_err}</TableCell>
                         <TableCell>{arrayValue.rx_frame_err}</TableCell>
                         <TableCell>{arrayValue.time_interval}</TableCell>
-                        <TableCell>{arrayValue.created}</TableCell>
                         <TableCell>{moment(arrayValue.created).format('DD/MM/YYYY h:mm:ss a')}</TableCell>
                     </TableRow>
                 ))

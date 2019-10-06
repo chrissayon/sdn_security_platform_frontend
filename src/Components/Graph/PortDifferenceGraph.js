@@ -7,12 +7,16 @@ import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
     root: {
-      display: 'flex',
-      flexWrap: 'wrap',
+        display: 'flex',
+        flexWrap: 'wrap',
     },
     graphBox: {
-      height: 400
+        height: 500,
     },
+    gridBox: {
+        height: 300,
+    }
+
   }));
 
 const PortGraph = (props) => {
@@ -95,7 +99,7 @@ const PortGraph = (props) => {
         return () => {
           clearInterval(interval);
         };
-    }, []);
+    }, [props.maxRecords]);
     
     //Render upon initialization
     React.useEffect(() => {
@@ -105,27 +109,81 @@ const PortGraph = (props) => {
     return (
         <Grid container >
             <Grid item xs={12} className={classes.graphBox}>
+                <h1>Port 1</h1>
                 <LineChart width={600} height={400} data={graphData1}>
                     <Line type="monotone" dataKey="rx_bytes" stroke="#8884d8" />
                     <CartesianGrid stroke="#ccc" />
-                    <XAxis dataKey="date" angle={-45} height={50} textAnchor="end"/>
-                    <YAxis />
+                    <XAxis 
+                        dataKey="date" 
+                        angle={-45} 
+                        height={50} 
+                        textAnchor="end"
+                        label={{ 
+                            value: 'Time', 
+                            position: 'insideBottomRight',
+                            dy: 5,
+                            offset: 0
+                        }}
+                    />
+                    <YAxis 
+                        label={{ 
+                            value: 'RX Bytes', 
+                            angle: -90, 
+                            position: 'insideLeft' 
+                        }}
+                    />
                 </LineChart>
             </Grid>
             <Grid item xs={12} className={classes.graphBox}>
+                <h1>Port 2</h1>
                 <LineChart width={600} height={400} data={graphData2}>
                     <Line type="monotone" dataKey="rx_bytes" stroke="#8884d8" />
                     <CartesianGrid stroke="#ccc" />
-                    <XAxis dataKey="date" angle={-45} height={50} textAnchor="end"/>
-                    <YAxis />
+                    <XAxis 
+                        dataKey="date" 
+                        angle={-45} 
+                        height={50} 
+                        textAnchor="end"
+                        label={{ 
+                            value: 'Time', 
+                            position: 'insideBottomRight',
+                            dy: 5,
+                            offset: 0
+                        }}
+                    />
+                    <YAxis 
+                        label={{ 
+                            value: 'RX Bytes', 
+                            angle: -90, 
+                            position: 'insideLeft' 
+                        }}
+                    />
                 </LineChart>
             </Grid>
             <Grid item xs={12} className={classes.graphBox}>
+              <h1>Port 3</h1>
                 <LineChart width={600} height={400} data={graphData3}>
                     <Line type="monotone" dataKey="rx_bytes" stroke="#8884d8" />
                     <CartesianGrid stroke="#ccc" />
-                    <XAxis dataKey="date" angle={-45} height={50} textAnchor="end"/>
-                    <YAxis />
+                    <XAxis 
+                        dataKey="date" 
+                        angle={-45} 
+                        height={50} 
+                        textAnchor="end"
+                        label={{ 
+                            value: 'Time', 
+                            position: 'insideBottomRight',
+                            dy: 5,
+                            offset: 0
+                        }}
+                    />
+                    <YAxis 
+                        label={{ 
+                            value: 'RX Bytes', 
+                            angle: -90, 
+                            position: 'insideLeft' 
+                        }}
+                    />
                 </LineChart>
             </Grid>
         </Grid>
