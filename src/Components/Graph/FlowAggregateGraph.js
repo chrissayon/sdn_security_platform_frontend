@@ -35,7 +35,7 @@ const FlowAggregateGraph = (props) => {
     React.useEffect(() => {
         const interval = setInterval(() => {
             flowAggPost()
-        }, 5000);
+        }, 10000);
         return () => {
           clearInterval(interval);
         };

@@ -185,14 +185,6 @@ const MainBody = (props) => {
     setOpen(false);
   };
 
-  //Ping notification
-  const handleNotification = () => {
-    axios.get('http://127.0.0.1:8000/sdn_communication/flow_agg_diff_graph/')
-    .then((response) => {})  
-    
-    
-
-  };
   
   return (
     <div className={classes.root}>

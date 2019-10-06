@@ -95,7 +95,7 @@ const PortGraph = (props) => {
         const interval = setInterval(() => {
             portPost()
             console.log(props.maxRecords)
-        }, 5000);
+        }, 10000);
         return () => {
           clearInterval(interval);
         };

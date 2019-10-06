@@ -90,7 +90,7 @@ const PortGraph = (props) => {
     React.useEffect(() => {
         const interval = setInterval(() => {
             portPost()
-        }, 5000);
+        }, 10000);
         return () => {
           clearInterval(interval);
         };
