@@ -151,11 +151,11 @@ const MainBody = (props) => {
         route: '/alarm-thresholds',
         icon: <ListItemIcon><BuildIcon /></ListItemIcon>
       },
-      {
-        name: 'Notification Settings',
-        route: '/notification-settings',
-        icon: <ListItemIcon><EventNoteIcon /></ListItemIcon>
-      },
+      // {
+      //   name: 'Notification Settings',
+      //   route: '/notification-settings',
+      //   icon: <ListItemIcon><EventNoteIcon /></ListItemIcon>
+      // },
       {
         name: 'Live Monitoring',
         route: '/live-monitoring',

@@ -65,7 +65,7 @@ const FlowAggregateGraph = (props) => {
                     />
                     <YAxis 
                         label={{ 
-                            value: 'Total Bytes', 
+                            value: 'Byte Count', 
                             angle: -90, 
                             position: 'insideLeft' 
                         }}
