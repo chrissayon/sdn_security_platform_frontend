@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import moment from 'moment';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
@@ -12,6 +12,7 @@ const useStyles = makeStyles(theme => ({
     },
     graphBox: {
         height: 500,
+        marginBottom: theme.spacing(10)
     },
     gridBox: {
         height: 300,
@@ -110,81 +111,90 @@ const PortGraph = (props) => {
         <Grid container >
             <Grid item xs={12} className={classes.graphBox}>
                 <h1>Port 1</h1>
-                <LineChart width={600} height={400} data={graphData1}>
-                    <Line type="monotone" dataKey="rx_bytes" stroke="#8884d8" />
-                    <CartesianGrid stroke="#ccc" />
-                    <XAxis 
-                        dataKey="date" 
-                        angle={-45} 
-                        height={50} 
-                        textAnchor="end"
-                        label={{ 
-                            value: 'Time', 
-                            position: 'insideBottomRight',
-                            dy: 5,
-                            offset: 0
-                        }}
-                    />
-                    <YAxis 
-                        label={{ 
-                            value: 'RX Bytes', 
-                            angle: -90, 
-                            position: 'insideLeft' 
-                        }}
-                    />
-                </LineChart>
+                {/* <ResponsiveContainer> */}
+                    <LineChart width={600} height={400} data={graphData1}>
+                        <Line type="monotone" dataKey="rx_bytes" stroke="#8884d8" />
+                        <CartesianGrid stroke="#ccc" />
+                        <XAxis 
+                            dataKey="date" 
+                            angle={-45} 
+                            height={50} 
+                            textAnchor="end"
+                            label={{ 
+                                value: 'Time', 
+                                position: 'insideBottomRight',
+                                dy: 5,
+                                offset: 0
+                            }}
+                        />
+                        <YAxis 
+                            label={{ 
+                                value: 'RX Bytes', 
+                                angle: -90, 
+                                position: 'insideLeft' 
+                            }}
+                        />
+                        <Tooltip />
+                    </LineChart>
+                {/* </ResponsiveContainer> */}
             </Grid>
             <Grid item xs={12} className={classes.graphBox}>
                 <h1>Port 2</h1>
-                <LineChart width={600} height={400} data={graphData2}>
-                    <Line type="monotone" dataKey="rx_bytes" stroke="#8884d8" />
-                    <CartesianGrid stroke="#ccc" />
-                    <XAxis 
-                        dataKey="date" 
-                        angle={-45} 
-                        height={50} 
-                        textAnchor="end"
-                        label={{ 
-                            value: 'Time', 
-                            position: 'insideBottomRight',
-                            dy: 5,
-                            offset: 0
-                        }}
-                    />
-                    <YAxis 
-                        label={{ 
-                            value: 'RX Bytes', 
-                            angle: -90, 
-                            position: 'insideLeft' 
-                        }}
-                    />
-                </LineChart>
+                {/* <ResponsiveContainer> */}
+                    <LineChart width={600} height={400} data={graphData2}>
+                        <Line type="monotone" dataKey="rx_bytes" stroke="#8884d8" />
+                        <CartesianGrid stroke="#ccc" />
+                        <XAxis 
+                            dataKey="date" 
+                            angle={-45} 
+                            height={50} 
+                            textAnchor="end"
+                            label={{ 
+                                value: 'Time', 
+                                position: 'insideBottomRight',
+                                dy: 5,
+                                offset: 0
+                            }}
+                        />
+                        <YAxis 
+                            label={{ 
+                                value: 'RX Bytes', 
+                                angle: -90, 
+                                position: 'insideLeft' 
+                            }}
+                        />
+                        <Tooltip />
+                    </LineChart>
+                {/* </ResponsiveContainer> */}
             </Grid>
             <Grid item xs={12} className={classes.graphBox}>
-              <h1>Port 3</h1>
-                <LineChart width={600} height={400} data={graphData3}>
-                    <Line type="monotone" dataKey="rx_bytes" stroke="#8884d8" />
-                    <CartesianGrid stroke="#ccc" />
-                    <XAxis 
-                        dataKey="date" 
-                        angle={-45} 
-                        height={50} 
-                        textAnchor="end"
-                        label={{ 
-                            value: 'Time', 
-                            position: 'insideBottomRight',
-                            dy: 5,
-                            offset: 0
-                        }}
-                    />
-                    <YAxis 
-                        label={{ 
-                            value: 'RX Bytes', 
-                            angle: -90, 
-                            position: 'insideLeft' 
-                        }}
-                    />
-                </LineChart>
+                <h1>Port 3</h1>
+                {/* <ResponsiveContainer> */}
+                    <LineChart width={600} height={400} data={graphData3}>
+                        <Line type="monotone" dataKey="rx_bytes" stroke="#8884d8" />
+                        <CartesianGrid stroke="#ccc" />
+                        <XAxis 
+                            dataKey="date" 
+                            angle={-45} 
+                            height={50} 
+                            textAnchor="end"
+                            label={{ 
+                                value: 'Time', 
+                                position: 'insideBottomRight',
+                                dy: 5,
+                                offset: 0
+                            }}
+                        />
+                        <YAxis 
+                            label={{ 
+                                value: 'RX Bytes', 
+                                angle: -90, 
+                                position: 'insideLeft' 
+                            }}
+                        />
+                        <Tooltip />
+                    </LineChart>
+                {/* </ResponsiveContainer> */}
             </Grid>
         </Grid>
     )

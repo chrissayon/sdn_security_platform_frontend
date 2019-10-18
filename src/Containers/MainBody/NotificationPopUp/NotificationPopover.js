@@ -90,10 +90,13 @@ function NotificationPopover() {
             },})
             .then((response) => {
                 // console.log(response)
+                // console.log("Response Data: " + response.data[0].id)
+                // console.log("NotificationData: " + notificationData[0].id)
                 if((response.data.length !== 0) && (notificationData[0].id !== response.data[0].id)) {
                     setNotificationData(response.data)
                     setNotifications("Alerts have been triggered: latest alert is " + response.data[0].attack_vector + "!")
                     setNotificationPressed(false);
+                    console.log("Alert detected")
                 }
             })
         }, 15000);

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 
 const FlowAggregateGraph = (props) => {
@@ -48,29 +48,32 @@ const FlowAggregateGraph = (props) => {
     
 
     return (
-        <LineChart width={600} height={400} data={graphData}>
-            <Line type="monotone" dataKey="packet_count" stroke="#8884d8" />
-            <CartesianGrid stroke="#ccc" />
-            <XAxis 
-                        dataKey="date" 
-                        angle={-45} 
-                        height={50} 
-                        textAnchor="end"
-                        label={{ 
-                            value: 'Time', 
-                            position: 'insideBottomRight',
-                            dy: 5,
-                            offset: 0
-                        }}
-                    />
-                    <YAxis 
-                        label={{ 
-                            value: 'Byte Count', 
-                            angle: -90, 
-                            position: 'insideLeft' 
-                        }}
-                    />
-        </LineChart>
+        // <ResponsiveContainer>
+            <LineChart width={600} height={400} data={graphData}>
+                <Line type="monotone" dataKey="packet_count" stroke="#8884d8" />
+                <CartesianGrid stroke="#ccc" />
+                <XAxis 
+                    dataKey="date" 
+                    angle={-45} 
+                    height={50} 
+                    textAnchor="end"
+                    label={{ 
+                        value: 'Time', 
+                        position: 'insideBottomRight',
+                        dy: 5,
+                        offset: 0
+                    }}
+                />
+                <YAxis 
+                    label={{ 
+                        value: 'Byte Count', 
+                        angle: -90, 
+                        position: 'insideLeft' 
+                    }}
+                />
+                <Tooltip />
+            </LineChart>
+        // </ResponsiveContainer>
     )
 };
 
