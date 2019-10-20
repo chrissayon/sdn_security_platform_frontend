@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ViewLogs() {
     const classes = useStyles();
-    
+
     //State for dropdown selection of stats
     const [values, setValues] = React.useState({
         statType: 'flow_aggregate',
@@ -53,10 +53,10 @@ export default function ViewLogs() {
     //State for start and enddate information
     const [startDate, setStartDate] = React.useState(new Date('2014-08-18T21:11:54'));
     const [endDate, setEndDate] = React.useState(new Date('2020-08-18T21:11:54'));
-    
+
     //State dictating how many records to return from the backend
     const [maxRecords, setMaxRecords] = React.useState(1)
-    
+
     //State for whether View Logs Button has been clicked
     const [viewLogs, setViewLogs] = React.useState(false)
 
@@ -84,14 +84,14 @@ export default function ViewLogs() {
         setMaxRecords(parseInt(event.target.value))
     }
 
-    // Handler change for port selector 
+    // Handler change for port selector
     const handlePortValue = event => {
         setPortValues(oldValues => ({
             ...oldValues,
             [event.target.name]: event.target.value,
         }));
     }
-    
+
     // Handler for stat selection
     const handleChange = event => {
         setValues(oldValues => ({
@@ -111,7 +111,7 @@ export default function ViewLogs() {
 
     const flowAggPost = () => {
         axios.post('http://127.0.0.1:8000/sdn_communication/attack_notification/',{
-            data: { 
+            data: {
                 'maxRecords' : maxRecords,
                 'startDateYear' : startDate.getFullYear(),
                 'startDateMonth' : startDate.getMonth() + 1,
@@ -130,7 +130,7 @@ export default function ViewLogs() {
                     <TableCell>Row Number</TableCell>
                     <TableCell>Attack Type</TableCell>
                     <TableCell>Attack Vector</TableCell>
-                    <TableCell>Attack Value</TableCell>
+                    <TableCell>Exceeded Value</TableCell>
                     <TableCell>Threshold</TableCell>
                     <TableCell>Created</TableCell>
                 </TableRow>
@@ -152,7 +152,7 @@ export default function ViewLogs() {
 
     const flowAggDiffPost = () => {
         axios.post('http://127.0.0.1:8000/sdn_communication/attack_notification/',{
-            data: { 
+            data: {
                 'maxRecords' : maxRecords,
                 'startDateYear' : startDate.getFullYear(),
                 'startDateMonth' : startDate.getMonth() + 1,
@@ -171,7 +171,7 @@ export default function ViewLogs() {
                     <TableCell>Row Number</TableCell>
                     <TableCell>Attack Type</TableCell>
                     <TableCell>Attack Vector</TableCell>
-                    <TableCell>Attack Value</TableCell>
+                    <TableCell>Exceeded Value</TableCell>
                     <TableCell>Threshold</TableCell>
                     <TableCell>Created</TableCell>
                 </TableRow>
@@ -193,7 +193,7 @@ export default function ViewLogs() {
 
     const portPost = () => {
         axios.post('http://127.0.0.1:8000/sdn_communication/attack_notification/',{
-            data: { 
+            data: {
                 'maxRecords' : maxRecords,
                 'startDateYear' : startDate.getFullYear(),
                 'startDateMonth' : startDate.getMonth() + 1,
@@ -214,12 +214,13 @@ export default function ViewLogs() {
                     <TableCell>Attack Type</TableCell>
                     <TableCell>Attack Vector</TableCell>
                     <TableCell>Port Value</TableCell>
-                    <TableCell>Attack Value</TableCell>
+                    <TableCell>Exceeded Value</TableCell>
                     <TableCell>Threshold</TableCell>
                     <TableCell>Created</TableCell>
                 </TableRow>
             )
             console.log(response.data)
+            console.log(response.data.arrayValue.attack_value)
             setBody(
                 response.data.map((arrayValue, index) => (
                     <TableRow key={index}>
@@ -238,7 +239,7 @@ export default function ViewLogs() {
 
     const portDiffPost = () => {
         axios.post('http://127.0.0.1:8000/sdn_communication/attack_notification/',{
-            data: { 
+            data: {
                 'maxRecords' : maxRecords,
                 'startDateYear' : startDate.getFullYear(),
                 'startDateMonth' : startDate.getMonth() + 1,
@@ -259,7 +260,7 @@ export default function ViewLogs() {
                     <TableCell>Attack Type</TableCell>
                     <TableCell>Attack Vector</TableCell>
                     <TableCell>Port Value</TableCell>
-                    <TableCell>Attack Value</TableCell>
+                    <TableCell>Exceeded Value</TableCell>
                     <TableCell>Threshold</TableCell>
                     <TableCell>Created</TableCell>
                 </TableRow>
@@ -317,25 +318,25 @@ export default function ViewLogs() {
                             className={classes.selectEmpty}
                         >
 
-                       
+
                         <MenuItem value={"flow_aggregate"}>Flow Aggregate Statistics</MenuItem>
                         <MenuItem value={"flow_aggregate_diff"}>Flow Aggregate Difference Statistics</MenuItem>
-                        
+
                         <MenuItem value={"port_stats"}>Port Statistics</MenuItem>
                         <MenuItem value={"port_diff"}>Port Difference Statistics</MenuItem>
                         {/* <MenuItem value={"flow_stats"}>Flow Statistics</MenuItem> */}
-                            
+
                         </Select>
                         <FormHelperText>Select desired data</FormHelperText>
                     </FormControl>
                 </form>
             </Grid>
-            
+
 
 
             <Grid item xs={12}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker 
+                    <KeyboardDatePicker
                         className={classes.formControl}
                         disableToolbar
                         variant="inline"
@@ -373,13 +374,13 @@ export default function ViewLogs() {
                     type="number"
                     onChange={handleRecordChange}
                 />
-                
+
             </Grid>
 
             <Grid item xs={12}>
-                <Button 
-                    variant="outlined" 
-                    className={classes.formControl} 
+                <Button
+                    variant="outlined"
+                    className={classes.formControl}
                     onClick={logClicked}
                 >
                     View Logs
@@ -425,7 +426,7 @@ export default function ViewLogs() {
                         {
                             body
                         }
-                        
+
                     </TableBody>
                 </Table>
             </Grid>
