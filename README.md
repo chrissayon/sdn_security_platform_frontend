@@ -5,8 +5,8 @@ Provided you already know about SDN architecture, the backend of this project pe
 
 Setup:
 Assuming you have nodejs already installed, go into the root directory and run
-# `npm install`
+#### `npm install`
 This will install all the packages
 
 Afterwards, you can start the server by running:
-# `npm start`
+#### `npm start`
