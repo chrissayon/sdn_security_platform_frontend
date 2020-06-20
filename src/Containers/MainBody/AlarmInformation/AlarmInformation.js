@@ -110,7 +110,7 @@ export default function ViewLogs() {
     // }, [logData])
 
     const flowAggPost = () => {
-        axios.post('http://127.0.0.1:8000/sdn_communication/attack_notification/',{
+        axios.post('http://10.0.1.10:8000/sdn_communication/attack_notification/',{
             data: {
                 'maxRecords' : maxRecords,
                 'startDateYear' : startDate.getFullYear(),
@@ -151,7 +151,7 @@ export default function ViewLogs() {
     }
 
     const flowAggDiffPost = () => {
-        axios.post('http://127.0.0.1:8000/sdn_communication/attack_notification/',{
+        axios.post('http://10.0.1.10:8000/sdn_communication/attack_notification/',{
             data: {
                 'maxRecords' : maxRecords,
                 'startDateYear' : startDate.getFullYear(),
@@ -192,7 +192,7 @@ export default function ViewLogs() {
     }
 
     const portPost = () => {
-        axios.post('http://127.0.0.1:8000/sdn_communication/attack_notification/',{
+        axios.post('http://10.0.1.10:8000/sdn_communication/attack_notification/',{
             data: {
                 'maxRecords' : maxRecords,
                 'startDateYear' : startDate.getFullYear(),
@@ -238,7 +238,7 @@ export default function ViewLogs() {
     }
 
     const portDiffPost = () => {
-        axios.post('http://127.0.0.1:8000/sdn_communication/attack_notification/',{
+        axios.post('http://10.0.1.10:8000/sdn_communication/attack_notification/',{
             data: {
                 'maxRecords' : maxRecords,
                 'startDateYear' : startDate.getFullYear(),

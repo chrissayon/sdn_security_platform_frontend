@@ -19,7 +19,7 @@ class MLConfiguration extends Component {
 
     setMlThreshold = () => {
         let self = this;
-        axios.post('http://127.0.0.1:8000/sdn_communication/update_ml_threshold/',{
+        axios.post('http://10.0.1.10:8000/sdn_communication/update_ml_threshold/',{
             data: { ml_threshold : this.state.inputMlThreshold },
         })
         .then((response) => {
@@ -29,7 +29,7 @@ class MLConfiguration extends Component {
     }
 
     getMlThreshold = () => {
-        axios.get('http://127.0.0.1:8000/sdn_communication/update_ml_threshold/')
+        axios.get('http://10.0.1.10:8000/sdn_communication/update_ml_threshold/')
         .then((response) => {
             console.log(response)
             this.setState({mlThreshold: response.data.ml_threshold})

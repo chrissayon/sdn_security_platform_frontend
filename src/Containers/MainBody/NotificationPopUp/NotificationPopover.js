@@ -49,7 +49,7 @@ function NotificationPopover() {
     
 
     // const notificationPost = () => {
-    //     axios.post('http://127.0.0.1:8000/sdn_communication/attack_notification/',{
+    //     axios.post('http://10.0.1.10:8000/sdn_communication/attack_notification/',{
     //         data: { 
     //             'maxRecords' : 5,
     //             'startDateYear' : startNotificationDate.getFullYear(),
@@ -77,7 +77,7 @@ function NotificationPopover() {
     React.useEffect(() => {
         const interval = setInterval(() => { 
             // notificationPost()
-            axios.post('http://127.0.0.1:8000/sdn_communication/attack_notification/',{
+            axios.post('http://10.0.1.10:8000/sdn_communication/attack_notification/',{
             data: { 
                 'maxRecords' : 5,
                 'startDateYear' : startNotificationDate.getFullYear(),

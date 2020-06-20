@@ -58,7 +58,7 @@ class FlowAggregateGraph extends Component {
 
 
     getData() {
-        axios.get('http://127.0.0.1:8000/sdn_communication/flow_agg_stats/')
+        axios.get('http://10.0.1.10:8000/sdn_communication/flow_agg_stats/')
             .then((response) => {
                 let graphData = this.state;
                 xValue += 5;

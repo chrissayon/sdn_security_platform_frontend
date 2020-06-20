@@ -60,7 +60,7 @@ export default class Chart extends Component {
 
 
     getData() {
-        axios.get('http://127.0.0.1:8000/sdn_communication/port_stats/')
+        axios.get('http://10.0.1.10:8000/sdn_communication/port_stats/')
             .then((response) => {
                 let graphData = this.state;
                 // console.log(response)

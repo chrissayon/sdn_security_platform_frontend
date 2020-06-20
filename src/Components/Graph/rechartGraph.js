@@ -20,7 +20,7 @@ class renderLineChart extends Component {
     }
 
     getData() {
-        axios.get('http://127.0.0.1:8000/sdn_communication/desc_stats')
+        axios.get('http://10.0.1.10:8000/sdn_communication/desc_stats')
             .then((response) => {
                 console.log(response)
             })

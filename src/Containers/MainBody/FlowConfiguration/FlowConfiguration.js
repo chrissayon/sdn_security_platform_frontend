@@ -117,7 +117,7 @@ export default function FlowConfiguration() {
     }
 
     const flowStats = () => {
-        axios.post('http://127.0.0.1:8000/sdn_communication/flow_stats/',{
+        axios.post('http://10.0.1.10:8000/sdn_communication/flow_stats/',{
             data: { 
                 'maxRecords' : maxRecords,
                 'filter' : 123917682137064,
@@ -187,8 +187,8 @@ export default function FlowConfiguration() {
             }]
         }           
 
-        axios.post('http://127.0.0.1:8000/sdn_communication/flow_stats/', {
-                // 'url' : 'http://127.0.0.1:6653/stats/flowentry/add',
+        axios.post('http://10.0.1.10:8000/sdn_communication/flow_stats/', {
+                // 'url' : 'http://10.0.1.10:6653/stats/flowentry/add',
                 // 'dpid' : 123917682137064,
                 // 'table_id' : 0,
                 // 'idle_timeout' : 0,

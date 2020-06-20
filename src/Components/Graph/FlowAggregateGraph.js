@@ -10,7 +10,7 @@ const FlowAggregateGraph = (props) => {
     
     // Post fnuction for obtaining data from backend
     const flowAggPost = () => {
-        axios.post('http://127.0.0.1:8000/sdn_communication/flow_agg_diff_graph/',{
+        axios.post('http://10.0.1.10:8000/sdn_communication/flow_agg_diff_graph/',{
             data: { 
                 maxRecords: props.maxRecords
             },

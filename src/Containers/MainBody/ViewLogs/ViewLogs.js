@@ -110,7 +110,7 @@ export default function ViewLogs() {
     // }, [logData])
 
     const flowAggPost = () => {
-        axios.post('http://127.0.0.1:8000/sdn_communication/flow_agg_stats/',{
+        axios.post('http://10.0.1.10:8000/sdn_communication/flow_agg_stats/',{
             data: { 
                 'maxRecords' : maxRecords,
                 'startDateYear' : startDate.getFullYear(),
@@ -146,7 +146,7 @@ export default function ViewLogs() {
     }
 
     const flowAggDiffPost = () => {
-        axios.post('http://127.0.0.1:8000/sdn_communication/flow_agg_diff/',{
+        axios.post('http://10.0.1.10:8000/sdn_communication/flow_agg_diff/',{
             data: { 
                 'maxRecords' : maxRecords,
                 'startDateYear' : startDate.getFullYear(),
@@ -184,7 +184,7 @@ export default function ViewLogs() {
     }
 
     const portPost = () => {
-        axios.post('http://127.0.0.1:8000/sdn_communication/port_stats/',{
+        axios.post('http://10.0.1.10:8000/sdn_communication/port_stats/',{
             data: { 
                 'maxRecords' : maxRecords,
                 'startDateYear' : startDate.getFullYear(),
@@ -242,7 +242,7 @@ export default function ViewLogs() {
     }
 
     const portDiffPost = () => {
-        axios.post('http://127.0.0.1:8000/sdn_communication/port_diff/',{
+        axios.post('http://10.0.1.10:8000/sdn_communication/port_diff/',{
             data: { 
                 'maxRecords' : maxRecords,
                 'startDateYear' : startDate.getFullYear(),

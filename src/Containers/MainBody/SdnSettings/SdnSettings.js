@@ -24,7 +24,7 @@ class SdnSettings extends Component {
 
     setControllerAddress = () => {
         let self = this;
-        axios.post('http://127.0.0.1:8000/sdn_communication/update_controller_IP/',{
+        axios.post('http://10.0.1.10:8000/sdn_communication/update_controller_IP/',{
             data: { controllerIP : this.state.inputControllerIP },
         })
         .then((response) => {
@@ -36,7 +36,7 @@ class SdnSettings extends Component {
     getControllerAddress = () => {
        
         
-        axios.get('http://127.0.0.1:8000/sdn_communication/update_controller_IP/')
+        axios.get('http://10.0.1.10:8000/sdn_communication/update_controller_IP/')
         .then((response) => {
             console.log(response)
             this.setState({controllerIP: response.data.controllerIP})
